@@ -1,0 +1,62 @@
+# Endless works to do ;)
+
+Environment : 
+	1. Obstacles design planning and modelling
+	2. Different environments aesthetics planning
+
+Character :
+	1. Designs
+		> Design a character model
+		> Materials and Textures for character
+		> Particles emission and shading
+
+	2. Animation
+		> Turning animation
+		> Crash animation
+
+	3. Controls
+		> Movement control
+		> Dynamic FOV
+		> Constraints controls (movement limitations)
+		> State Controls (alive/dead determination)
+		
+	4. Abilities
+		> Booster
+		> Jump
+		> Shield
+		> Magnet
+
+Gameplay :
+	1. Endless environment generation
+		> Still-player moving environment method
+		> Obstacles generation 
+		> Environment transition
+		> Day night cycle programming
+
+	2. Scoring methods
+		> Shards design
+		> Shards capture audio
+
+	3. In-play Powerups
+		> *Abilities* design
+		> *Abilities* capture
+
+	4. Main menu
+		> Game logo
+		> Menu design
+		> Menu programming
+
+	5. Game over screen
+		> Game over screen Design
+		> Game over screen Programming
+
+	6. Project Build
+		> Implement controls for Android/IOS devices
+		> Build project
+	
+	7. Deploy project
+		> Google playstore Account 
+		> Deploy game on store
+	
+	8. Extras
+		> Nothing yet <
