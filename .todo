@@ -1,5 +1,6 @@
 # Endless works to do ;)
 
+# TODO
 Environment : 
 	1. Obstacles design planning and modelling
 	2. Different environments aesthetics planning
@@ -15,8 +16,9 @@ Character :
 		> Crash animation
 
 	3. Controls
-		> Movement control
-		> Dynamic FOV
+		> Dynamic FOV < DONE >
+		> Turning effect < DONE >
+		> Movement controls < DONE >
 		> Constraints controls (movement limitations)
 		> State Controls (alive/dead determination)
 		
