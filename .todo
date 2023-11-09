@@ -30,9 +30,9 @@ Character :
 
 Gameplay :
 	1. Endless environment generation
-		> Still-player moving environment method
+		> Chunk-wise Level Generation < DONE >
 		> Obstacles generation 
-		> Environment transition
+		> Level Ending and Transition
 		> Day night cycle programming
 
 	2. Scoring methods

@@ -8,23 +8,22 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody rb;
     private CameraController camController;
 
-    public float thrust;
-    public float boost;
-    public float turnPower;
-    public float jumpPower;
+    [SerializeField] float thrust;
+    [SerializeField] float boost;
+    [SerializeField] float turnPower;
+    [SerializeField] float jumpPower;
 
-    public Vector3 maxTilt = new Vector3(20, 0, 30);
+    [SerializeField] Vector3 maxTilt = new Vector3(20, 0, 30);
+
     private Coroutine tiltCoroutine;
     private Vector3 targetTilt = new Vector3(0,0,0);
 
-    void Start()
-    {
+    void Start(){
         rb = GetComponent<Rigidbody>();
         camController = GetComponentInChildren<Camera>().GetComponent<CameraController>();
     }
 
-    void FixedUpdate()
-    {
+    void FixedUpdate(){
 
         Vector3 force = new(0,0,0);
         force.z = thrust;
@@ -71,13 +70,11 @@ public class PlayerMovement : MonoBehaviour
         rb.AddForce(force);
     }
 
-    void Update()
-    {
+    void Update(){
         TiltPlayer(targetTilt, turnPower);
     }
 
-    void TiltPlayer(Vector3 targetTilt, float speed)
-    {
+    void TiltPlayer(Vector3 targetTilt, float speed){
         Quaternion targetRotation = Quaternion.Euler(targetTilt);
         transform.localRotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * speed);
     }

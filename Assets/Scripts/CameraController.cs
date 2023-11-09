@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
-    public float initialFOV = 60f;
-    public float zoomFOV = 75f;
+    [SerializeField] float initialFOV = 60f;
+    [SerializeField] float zoomFOV = 75f;
     
     private Coroutine fovCoroutine; 
 
