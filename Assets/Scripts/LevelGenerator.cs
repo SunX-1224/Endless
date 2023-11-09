@@ -5,26 +5,30 @@ using UnityEngine;
 public class LevelGenerator : MonoBehaviour{
     
     public Transform player;
-    public Material groundmat;
+    public List<GameObject> chunkTypes;
 
-    [SerializeField] Vector2 mapSize = new(10, 10);
-    
+    public const int mapSize = 100;
     public const int chunkSize = 10;
     public const float maxViewDist = 60f;
 
-    int chunksInViewDist;
-
+    public static bool levelCompleted;
     public static Vector2 playerPosition;
     
+    private int endLine;
+    int chunksInViewDist;
     Dictionary<Vector2, Chunk> chunkData = new Dictionary<Vector2, Chunk>();
     List<Vector2> lastFrameChunks = new List<Vector2>();
+
     void Start(){
+        levelCompleted = false;
         chunksInViewDist = Mathf.RoundToInt(maxViewDist / chunkSize);
+        endLine = mapSize * chunkSize;
     }
 
     void Update(){
         playerPosition = new Vector2(player.position.x, player.position.z);
         UpdateVisibleChunks();
+        levelCompleted = playerPosition.y >= endLine;
     }
 
     void UpdateVisibleChunks(){
@@ -43,7 +47,7 @@ public class LevelGenerator : MonoBehaviour{
                 if(chunkData.ContainsKey(chunkCoord)){
                     chunkData[chunkCoord].UpdateChunk();
                 }else{
-                    chunkData.Add(chunkCoord, new Chunk(chunkCoord, chunkSize, transform, groundmat));
+                    chunkData.Add(chunkCoord, new Chunk(chunkCoord, chunkSize, transform, chunkTypes));
                 }
                 lastFrameChunks.Add(chunkCoord);
             }
@@ -57,15 +61,12 @@ public class LevelGenerator : MonoBehaviour{
         Vector2 position;
         Bounds bounds;
 
-        public Chunk(Vector2 coord, int size, Transform parent, Material groundmat){
+        public Chunk(Vector2 coord, int size, Transform parent, List<GameObject> chunkTypes){
             position = coord * size;
             bounds = new Bounds(position, Vector2.one * size);
 
-            meshObject = GameObject.CreatePrimitive(PrimitiveType.Plane);
-            meshObject.transform.parent = parent;
+            meshObject = Instantiate(chunkTypes[Random.Range(0, chunkTypes.Count)], parent);
             meshObject.transform.position = new Vector3(position.x, -1.0f, position.y);
-            meshObject.transform.localScale = Vector3.one * size / 10f;
-            meshObject.GetComponent<MeshRenderer>().material = groundmat;
 
             SetVisible(false);
         }

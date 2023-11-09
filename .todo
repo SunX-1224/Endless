@@ -12,14 +12,12 @@ Character :
 		> Particles emission and shading
 
 	2. Animation
-		> Turning animation
 		> Crash animation
 
 	3. Controls
 		> Dynamic FOV < DONE >
 		> Turning effect < DONE >
 		> Movement controls < DONE >
-		> Constraints controls (movement limitations)
 		> State Controls (alive/dead determination)
 		
 	4. Abilities
@@ -31,7 +29,7 @@ Character :
 Gameplay :
 	1. Endless environment generation
 		> Chunk-wise Level Generation < DONE >
-		> Obstacles generation 
+		> Obstacles generation < DONE >
 		> Level Ending and Transition
 		> Day night cycle programming
 
