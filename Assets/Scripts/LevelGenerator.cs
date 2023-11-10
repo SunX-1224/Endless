@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class LevelGenerator : MonoBehaviour{
     
-    public Transform player;
+    Transform player;
     public List<GameObject> chunkTypes;
 
-    public const int mapSize = 100;
+    public const int mapSize = 10;
     public const int chunkSize = 10;
     public const float maxViewDist = 60f;
 
@@ -47,13 +47,18 @@ public class LevelGenerator : MonoBehaviour{
                 if(chunkData.ContainsKey(chunkCoord)){
                     chunkData[chunkCoord].UpdateChunk();
                 }else{
-                    chunkData.Add(chunkCoord, new Chunk(chunkCoord, chunkSize, transform, chunkTypes));
+                    GameObject chunk = Instantiate(chunkTypes[0], this.transform);
+                    //GameObject chunk = Instantiate(chunkTypes[Random.Range(0, chunkTypes.Count)], this.transform);
+                    chunkData.Add(chunkCoord, new Chunk(chunkCoord, chunkSize, chunk));
                 }
                 lastFrameChunks.Add(chunkCoord);
             }
         }
     }
-
+    
+    public void setPlayerTransform(Transform _player){
+        player = _player;
+    }
 
     public class Chunk{
         
@@ -61,12 +66,11 @@ public class LevelGenerator : MonoBehaviour{
         Vector2 position;
         Bounds bounds;
 
-        public Chunk(Vector2 coord, int size, Transform parent, List<GameObject> chunkTypes){
+        public Chunk(Vector2 coord, int size, GameObject mesh){
             position = coord * size;
             bounds = new Bounds(position, Vector2.one * size);
-
-            meshObject = Instantiate(chunkTypes[Random.Range(0, chunkTypes.Count)], parent);
-            meshObject.transform.position = new Vector3(position.x, -1.0f, position.y);
+            meshObject = mesh;
+            meshObject.transform.position = new Vector3(position.x, -0.5f, position.y);
 
             SetVisible(false);
         }

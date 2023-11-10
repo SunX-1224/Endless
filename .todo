@@ -30,6 +30,7 @@ Gameplay :
 	1. Endless environment generation
 		> Chunk-wise Level Generation < DONE >
 		> Obstacles generation < DONE >
+		> Fog effect < DONE >
 		> Level Ending and Transition
 		> Day night cycle programming
 
