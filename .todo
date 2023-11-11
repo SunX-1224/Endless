@@ -18,7 +18,7 @@ Character :
 		> Dynamic FOV < DONE >
 		> Turning effect < DONE >
 		> Movement controls < DONE >
-		> State Controls (alive/dead determination)
+		> State Controls (alive/dead determination) < DONE >
 		
 	4. Abilities
 		> Booster
@@ -44,8 +44,9 @@ Gameplay :
 
 	4. Main menu
 		> Game logo
-		> Menu design
-		> Menu programming
+		> Menu design < DONE >
+		> Menu programming < DONE >
+		> Logo Integration
 
 	5. Game over screen
 		> Game over screen Design

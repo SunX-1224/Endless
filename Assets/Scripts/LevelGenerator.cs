@@ -9,7 +9,7 @@ public class LevelGenerator : MonoBehaviour{
 
     public const int mapSize = 20;
     public const int chunkSize = 20;
-    public const float maxViewDist = 60f;
+    public const float maxViewDist = 150f;
 
     public static bool levelCompleted;
     public static Vector2 playerPosition;
