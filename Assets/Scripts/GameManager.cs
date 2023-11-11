@@ -1,34 +1,49 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
     [SerializeField] List<GameObject> levels;
-    [SerializeField] TransitionHandler transitionHandler;
+    [SerializeField] RawImage overlay;
     public Transform player;
 
     GameObject currentLevel;
 
     void Start(){
-        GenerateNewLevel();
-        player.position = Vector3.zero;
-        player.rotation = Quaternion.identity;
+        overlay.enabled = true;
+        StartCoroutine(HandleTransition(true));
     }
 
     void Update(){
         if(LevelGenerator.levelCompleted){
-            transitionHandler.StartFadeIn();
-            StartCoroutine(FinishTransition());
+            StartCoroutine(HandleTransition());
         }
     }
 
-    IEnumerator FinishTransition(){
+    IEnumerator HandleTransition(bool initState = false){
+        float a = 0f;
+        while(a < 1f && !initState){
+            a = Mathf.Clamp01(a + Time.deltaTime);
+            Color _c = overlay.color;
+            _c.a = a;
+            overlay.color = _c; 
+            yield return null;
+        }
+        GenerateNewLevel();
         player.position = Vector3.zero;
         player.rotation = Quaternion.identity;
-        yield return new WaitForSeconds(2);
-        GenerateNewLevel();
-        transitionHandler.StartFadeOut();
+        yield return new WaitForSeconds(1f);
+
+        a = 1.0f;
+        while(a > 0f){
+            a = Mathf.Clamp01(a - Time.deltaTime);
+            Color _c = overlay.color;
+            _c.a = a;
+            overlay.color = _c;
+            yield return null;
+        }
     }
 
     void GenerateNewLevel(){

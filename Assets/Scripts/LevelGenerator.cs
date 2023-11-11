@@ -7,8 +7,8 @@ public class LevelGenerator : MonoBehaviour{
     Transform player;
     public List<GameObject> chunkTypes;
 
-    public const int mapSize = 10;
-    public const int chunkSize = 10;
+    public const int mapSize = 20;
+    public const int chunkSize = 20;
     public const float maxViewDist = 60f;
 
     public static bool levelCompleted;
@@ -47,13 +47,24 @@ public class LevelGenerator : MonoBehaviour{
                 if(chunkData.ContainsKey(chunkCoord)){
                     chunkData[chunkCoord].UpdateChunk();
                 }else{
-                    GameObject chunk = Instantiate(chunkTypes[0], this.transform);
-                    //GameObject chunk = Instantiate(chunkTypes[Random.Range(0, chunkTypes.Count)], this.transform);
-                    chunkData.Add(chunkCoord, new Chunk(chunkCoord, chunkSize, chunk));
+                    generateChunk(chunkCoord); 
                 }
                 lastFrameChunks.Add(chunkCoord);
             }
         }
+    }
+
+    void generateChunk(Vector2 coord){
+        //level generation logic goes here
+        int type;
+        if(Mathf.Abs(coord.y - mapSize) < 2 || coord.y <= 2)
+            type = 0;
+        else
+            type = Random.Range(0, chunkTypes.Count);
+
+        // finally store the chunkData
+        GameObject chunk = Instantiate(chunkTypes[type], this.transform);
+        chunkData.Add(coord, new Chunk(coord, chunkSize, chunk));
     }
     
     public void setPlayerTransform(Transform _player){

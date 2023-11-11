@@ -57,6 +57,7 @@ public class CameraController : MonoBehaviour
     }
 
     public void TiltCamera(Vector3 targetTilt, float speed){
+        targetTilt.x = transform.rotation.x;
         Quaternion targetRotation = Quaternion.Euler(targetTilt);
         transform.localRotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * speed);
     }
