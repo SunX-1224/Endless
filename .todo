@@ -35,6 +35,7 @@ Gameplay :
 		> Day night cycle programming
 
 	2. Scoring methods
+		> Score Method Implementation (Shards)
 		> Shards design
 		> Shards capture audio
 
@@ -43,17 +44,20 @@ Gameplay :
 		> *Abilities* capture
 
 	4. Main menu
-		> Game logo
+		> Game logo Design < DONE >
 		> Menu design < DONE >
 		> Menu programming < DONE >
 		> Logo Integration
 
-	5. Game over screen
-		> Game over screen Design
-		> Game over screen Programming
+	5. Game state controls
+		> Pause menu design < DONE >
+		> Pause menu programming < DONE >
+		> Game over screen Design < DONE >
+		> Game over screen Programming < DONE >
 
 	6. Project Build
 		> Implement controls for Android/IOS devices
+		> Splash Screen
 		> Build project
 	
 	7. Deploy project

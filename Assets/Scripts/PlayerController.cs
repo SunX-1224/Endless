@@ -7,7 +7,6 @@ using UnityEngine;
 public struct Player{
 
     public bool isAlive;
-
     public float thrust;
     public float boost;
     public bool boostActive;
@@ -38,6 +37,7 @@ public class PlayerController : MonoBehaviour{
     }
 
     void HandleControls(){
+        if(!player.isAlive) return;
 
         Vector3 force = new(0, 0, 0);
         force.z = player.thrust;
@@ -80,20 +80,25 @@ public class PlayerController : MonoBehaviour{
             }
         }
         
-        if(rb.velocity.z >= 12f) force.z = 0.0f;
         rb.AddForce(force);
+        rb.velocity = new Vector3(rb.velocity.x, rb.velocity.y, Mathf.Clamp(rb.velocity.z, 0, 24f));
 
     }
 
     void TiltPlayer(Vector3 targetTilt, float speed){
+        if(!player.isAlive) return;
+
         Quaternion targetRotation = Quaternion.Euler(targetTilt);
         transform.localRotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * speed);
     }
 
     void OnCollisionEnter(Collision collision){
         // Update this after using 3d models as obstacles
-        if (collision.transform.parent.tag == "Obstacle"){
-            player.isAlive = false;
+        if (collision.collider.tag == "Obstacle"){
+            if(player.isAlive){
+                player.isAlive = false;
+                FindObjectOfType<GameManager>().EndGame();
+            }
         }
     }
 }

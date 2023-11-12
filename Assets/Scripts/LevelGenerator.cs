@@ -14,7 +14,7 @@ public class LevelGenerator : MonoBehaviour{
     public static bool levelCompleted;
     public static Vector2 playerPosition;
     
-    private int endLine;
+    int endLine;
     int chunksInViewDist;
     Dictionary<Vector2, Chunk> chunkData = new Dictionary<Vector2, Chunk>();
     List<Vector2> lastFrameChunks = new List<Vector2>();
@@ -57,7 +57,7 @@ public class LevelGenerator : MonoBehaviour{
     void generateChunk(Vector2 coord){
         //level generation logic goes here
         int type;
-        if(Mathf.Abs(coord.y - mapSize) < 2 || coord.y <= 2)
+        if(coord.y > (mapSize - 2) || coord.y <= 2)
             type = 0;
         else
             type = Random.Range(0, chunkTypes.Count);

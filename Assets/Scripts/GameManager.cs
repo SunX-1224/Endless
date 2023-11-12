@@ -2,24 +2,35 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
     [SerializeField] List<GameObject> levels;
     [SerializeField] RawImage overlay;
-    public Transform player;
-
+    [SerializeField] GameObject gameOverUI;
+    
     GameObject currentLevel;
+    GameObject player;
 
     void Start(){
         overlay.enabled = true;
+        player = GameObject.Find("Player");
         StartCoroutine(HandleTransition(true));
     }
 
     void Update(){
-        if(LevelGenerator.levelCompleted){
+        if(player.GetComponent<PlayerController>().player.isAlive && LevelGenerator.levelCompleted){
             StartCoroutine(HandleTransition());
         }
+    }
+
+    public void EndGame(){
+        gameOverUI.SetActive(true);
+    }
+    
+    public void Restart(){
+        SceneManager.LoadScene(1);
     }
 
     IEnumerator HandleTransition(bool initState = false){
@@ -32,9 +43,9 @@ public class GameManager : MonoBehaviour
             yield return null;
         }
         GenerateNewLevel();
-        player.position = Vector3.zero;
-        player.rotation = Quaternion.identity;
-        yield return new WaitForSeconds(1f);
+        player.transform.position = Vector3.zero;
+        player.transform.rotation = Quaternion.identity;
+        yield return new WaitForSeconds(0.3f);
 
         a = 1.0f;
         while(a > 0f){
@@ -54,6 +65,6 @@ public class GameManager : MonoBehaviour
             currentLevel = Instantiate(levels[0], this.transform);
         }
         currentLevel.transform.position = Vector3.zero;
-        currentLevel.GetComponent<LevelGenerator>().setPlayerTransform(player);
+        currentLevel.GetComponent<LevelGenerator>().setPlayerTransform(player.transform);
     }
 }
