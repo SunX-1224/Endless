@@ -6,35 +6,60 @@ using TMPro;
 
 public class GameManager : MonoBehaviour
 {
-    [SerializeField] List<GameObject> levels;
     [SerializeField] RawImage overlay;
     [SerializeField] TMP_Text ingameScore;
+    [SerializeField] TMP_Text shardsText;
     
-    GameObject currentLevel;
-    GameObject player;
-    int score = 0;
+    [SerializeField] CameraController cameraController;
+
+    [SerializeField] List<GameObject> playerPrefabs;
+    [SerializeField] List<GameObject> levels;
 
     public static bool gameOver;
     public static bool gamePaused;
+
+    GameObject currentLevel;
+    PlayerController player;
+    
+    int totalScore;
+    int levelScore;
+    int shards;
+    int highScore;
+
 
     void Start(){
         gameOver = false;
         gamePaused = false;
 
-        player = GameObject.Find("Player");
-        setScoreUI();
+        levelScore = 0;
+        totalScore = 0;
+
+        shards = PlayerInfo.GetShards();
+        highScore = PlayerInfo.GetHighScore();
+
+        GameObject _p = Instantiate(playerPrefabs[PlayerInfo.GetShipIndex()], transform);
+        player = _p.GetComponent<PlayerController>();
+        
+        cameraController.SetPlayerController(player);
 
         overlay.gameObject.SetActive(true);
         StartCoroutine(HandleTransition(true));
     }
 
     void Update(){
-        if(player.GetComponent<PlayerController>().player.isAlive && LevelGenerator.levelCompleted){
+        if(player.isAlive && LevelGenerator.levelCompleted){
             StartCoroutine(HandleTransition());
         }
 
         if(Input.GetKeyDown(KeyCode.Escape))
             HandlePause();
+        
+        HandleScoreUpdate();
+        SetStatusUI();
+    }
+
+    public void HandleScoreUpdate(){
+        levelScore = (int) player.transform.position.z;
     }
 
     public void HandlePause(){
@@ -51,23 +76,33 @@ public class GameManager : MonoBehaviour
 
     public void HandleCapture(string tag){
         if(tag == "Shard"){
-            score += 5;
-            setScoreUI();
+            totalScore += 20;
+            shards++;
+        }else if(tag == "Jump"){
+            player.jumps++;
+        }else if(tag == "Shield"){
+            player.shields++;
         }
+            
     }
 
     public void EndGame(){
+
+        PlayerInfo.SetHighScore(totalScore + levelScore);
+        PlayerInfo.SetShards(shards);
+
         gameOver = true;
         overlay.gameObject.SetActive(false);
         GetComponent<GameOverMenu>().Activate();
     }
 
-    void setScoreUI(){
-        ingameScore.text = $"{score}";
+    void SetStatusUI(){
+        ingameScore.text = $"Score\n{totalScore + levelScore}";
+        shardsText.text = $"Shards\n{shards}";
     }
 
     public int GetScore(){
-        return score;
+        return totalScore + levelScore;
     }
     
     IEnumerator HandleTransition(bool initState = false){
@@ -79,9 +114,9 @@ public class GameManager : MonoBehaviour
             overlay.color = _c; 
             yield return null;
         }
-        GenerateNewLevel();
         player.transform.position = Vector3.zero;
         player.transform.rotation = Quaternion.identity;
+        GenerateNewLevel();
         yield return new WaitForSeconds(0.3f);
 
         a = 1.0f;
@@ -95,7 +130,10 @@ public class GameManager : MonoBehaviour
     }
 
     void GenerateNewLevel(){
-        if(currentLevel){
+        totalScore += levelScore;
+        levelScore = 0;
+
+       if(currentLevel){
             Destroy(currentLevel);
             currentLevel = Instantiate(levels[Random.Range(0, levels.Count)], this.transform);
         }else{

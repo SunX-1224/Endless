@@ -6,6 +6,7 @@ public class PauseMenu : MonoBehaviour{
 
     [SerializeField] GameObject pauseMenuUI;
     [SerializeField] TMP_Text scoreText;
+    [SerializeField] TMP_Text shardsText;
 
 
     void Start(){
@@ -21,7 +22,9 @@ public class PauseMenu : MonoBehaviour{
     public void Pause(){
         int score = GetComponent<GameManager>().GetScore();
         scoreText.text = $"Score\n{score}";
+        shardsText.text = $"Shards\n{PlayerInfo.GetShards()}";
         pauseMenuUI.SetActive(true);
+        
         Time.timeScale = 0f;
         GameManager.gamePaused = true;
     }

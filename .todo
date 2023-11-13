@@ -24,7 +24,6 @@ Character :
 		> Booster < DONE >
 		> Jump < DONE >
 		> Shield
-		> Magnet
 
 Gameplay :
 	1. Endless environment generation
@@ -54,6 +53,7 @@ Gameplay :
 		> Pause menu programming < DONE >
 		> Game over screen Design < DONE >
 		> Game over screen Programming < DONE >
+		> PLayer Data storage < DONE >
 
 	6. Project Build
 		> Implement controls for Android/IOS devices

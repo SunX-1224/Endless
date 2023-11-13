@@ -4,30 +4,30 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
-    [SerializeField] float initialFOV = 60f;
-    [SerializeField] float zoomFOV = 75f;
-
+    float initialFOV = 60f;
+    float zoomFOV = 75f;
     Vector3 offset = new(0f, 0.4f, -1.2f);
-
-    private Coroutine fovCoroutine; 
-
+    
+    Coroutine fovCoroutine; 
     Camera cam;
-    Transform playerTransform;
-    PlayerController playerController;
+    PlayerController player = null;
+
     void Start(){
         cam = GetComponent<Camera>();
         cam.fieldOfView = initialFOV;
-
-        GameObject _pl = GameObject.Find("Player");
-        playerTransform = _pl.GetComponent<Transform>();
-        playerController = _pl.GetComponent<PlayerController>();
     }
 
     void Update(){
-        if(playerController.player.boostActive) IncreaseFOV(playerController.player.thrust+ playerController.player.boost);
+        if(!player) return;
+
+        if(player.boostActive) IncreaseFOV(player.GetForce());
         else ResetFOV(3.0f);
-        TiltCamera(playerController.player.targetTilt, playerController.player.turnPower);
-        transform.position = playerTransform.position + offset;
+        TiltCamera(player.targetTilt, player.GetTurnPower());
+        transform.position = player.transform.position + offset;
+    }
+
+    public void SetPlayerController(PlayerController _player){
+        player = _player;
     }
 
     void IncreaseFOV(float speed){

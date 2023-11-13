@@ -1,12 +1,18 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Audio;
+using TMPro;
 
 public class MainMenu : MonoBehaviour{
     
     public AudioMixer audioMixer;
+    [SerializeField] TMP_Text highScoreText;
+    [SerializeField] TMP_Text shardsText;
+
+    void Start(){
+        highScoreText.text = $"HighScore\n{PlayerInfo.GetHighScore()}";
+        shardsText.text = $"Shards\n{PlayerInfo.GetShards()}";
+    }
 
     public void LoadMenu(){
         SceneManager.LoadScene(0);

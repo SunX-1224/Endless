@@ -4,70 +4,73 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-[Serializable]
-public struct Player{
+public class PlayerController: MonoBehaviour{
 
+    GameManager gameManager;
+    
     public bool isAlive;
-    public float thrust;
-    public float boost;
+    public int jumps;
+    public int shields;
+
     public bool boostActive;
 
-    public float jumpPower;
-    public float turnPower;
-
-    public Vector3 maxTilt;
     public Vector3 targetTilt;
-}
+    public Vector3 maxTilt;
 
-public class PlayerController : MonoBehaviour{
-
-    public Player player;
-    
-    [SerializeField] GameManager gameManager;
-
-    private Rigidbody rb;
-    private Coroutine tiltCoroutine;
+    Rigidbody rb;
+    Coroutine tiltCoroutine;
+    Ship ship;
 
     void Start(){
+        gameManager = GetComponentInParent<GameManager>();
+        ship = GetComponent<Ship>();
         rb = GetComponent<Rigidbody>();
     }
 
     void Update(){
-        TiltPlayer(player.targetTilt, player.turnPower);
+        TiltPlayer();
     }
 
     void FixedUpdate(){
         HandleControls();
     }
 
+    public float GetForce(){
+        return ship.boost + ship.thrust;
+    }
+
+    public float GetTurnPower(){
+        return ship.turnPower;
+    }
+
     void HandleControls(){
-        if(!player.isAlive) return;
+        if(!isAlive) return;
 
         Vector3 force = new(0, 0, 0);
-        force.z = player.thrust;
-        player.targetTilt.y = 0;
+        force.z = ship.thrust;
+        targetTilt.y = 0;
 
         if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow)){
-            force.z += player.boost;
-            player.boostActive = true;
+            force.z += ship.boost;
+            boostActive = true;
         }else{
-            player.boostActive = false;
+            boostActive = false;
             if (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow)){
-                force.z -= player.boost;
-                player.targetTilt.x = -player.maxTilt.x;
+                force.z -= ship.boost;
+                targetTilt.x = -maxTilt.x;
             }else{
-                player.targetTilt.x = 0f;
+                targetTilt.x = 0f;
             }
         }
 
         if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow)){
-            force.x -= player.turnPower;
-            player.targetTilt.z = player.maxTilt.z;
+            force.x -= ship.turnPower;
+            targetTilt.z = maxTilt.z;
         }else if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow)){
-            force.x += player.turnPower;
-            player.targetTilt.z = -player.maxTilt.z;
+            force.x += ship.turnPower;
+            targetTilt.z = -maxTilt.z;
         }else{
-            player.targetTilt.z = 0f;
+            targetTilt.z = 0f;
         }
 
         if (rb.useGravity && transform.position.y < 0f){
@@ -77,9 +80,10 @@ public class PlayerController : MonoBehaviour{
         }
 
         if (Input.GetKey(KeyCode.Space)){
-            if (!rb.useGravity){
+            if (!rb.useGravity && jumps > 0){
+                jumps--;
                 rb.constraints = RigidbodyConstraints.FreezeRotationY;
-                rb.AddForce(0, player.jumpPower, 0);
+                rb.AddForce(0, ship.jumpPower, 0);
                 rb.useGravity = true;
             }
         }
@@ -89,26 +93,29 @@ public class PlayerController : MonoBehaviour{
 
     }
 
-    void TiltPlayer(Vector3 targetTilt, float speed){
-        if(!player.isAlive) return;
+    void TiltPlayer(){
+        if(!isAlive) return;
 
         Quaternion targetRotation = Quaternion.Euler(targetTilt);
-        transform.localRotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * speed);
+        transform.localRotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * ship.turnPower);
     }
 
-    void OnCollisionEnter(Collision collision){
-        // Update this after using 3d models as obstacles
-        if (collision.collider.tag == "Obstacle"){
-            if(player.isAlive){
-                player.isAlive = false;
-                FindObjectOfType<GameManager>().EndGame();
-            }
-        }
-    }
 
     void OnTriggerEnter(Collider collider){
-        gameManager.HandleCapture(collider.tag);
-        Destroy(collider.gameObject);
+        if (collider.tag == "Obstacle"){
+            if(isAlive){
+                if(shields > 0){
+                    shields--;
+                    Destroy(collider.gameObject);
+                }else{
+                    isAlive = false;
+                    gameManager.EndGame();
+                }
+            }
+        }else{
+            gameManager.HandleCapture(collider.tag);
+            Destroy(collider.gameObject);
+        }
     }
 }
 
