@@ -21,8 +21,8 @@ Character :
 		> State Controls (alive/dead determination) < DONE >
 		
 	4. Abilities
-		> Booster
-		> Jump
+		> Booster < DONE >
+		> Jump < DONE >
 		> Shield
 		> Magnet
 
@@ -35,7 +35,7 @@ Gameplay :
 		> Day night cycle programming
 
 	2. Scoring methods
-		> Score Method Implementation (Shards)
+		> Score Method Implementation (Shards) < DONE >
 		> Shards design
 		> Shards capture audio
 
@@ -44,7 +44,7 @@ Gameplay :
 		> *Abilities* capture
 
 	4. Main menu
-		> Game logo Design < DONE >
+		> Game logo Design < UNDER WORK >
 		> Menu design < DONE >
 		> Menu programming < DONE >
 		> Logo Integration

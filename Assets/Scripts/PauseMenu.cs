@@ -1,30 +1,29 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class PauseMenu : MonoBehaviour{
 
-    public static bool gamePaused = false;
-    public GameObject pauseMenuUI;
+    [SerializeField] GameObject pauseMenuUI;
+    [SerializeField] TMP_Text scoreText;
 
-    void Update(){
-        if(Input.GetKeyDown(KeyCode.Escape)){
-            if(gamePaused)
-                Resume();
-            else
-                Pause();
-        }
+
+    void Start(){
+        pauseMenuUI.SetActive(false);
     }
 
     public void Resume(){
         pauseMenuUI.SetActive(false);
         Time.timeScale = 1f;
-        gamePaused = false;
+        GameManager.gamePaused = false;
     }
 
     public void Pause(){
+        int score = GetComponent<GameManager>().GetScore();
+        scoreText.text = $"Score\n{score}";
         pauseMenuUI.SetActive(true);
         Time.timeScale = 0f;
-        gamePaused = true;
+        GameManager.gamePaused = true;
     }
 
     public void LoadMenu(){

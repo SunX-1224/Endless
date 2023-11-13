@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 [Serializable]
 public struct Player{
@@ -19,7 +20,10 @@ public struct Player{
 }
 
 public class PlayerController : MonoBehaviour{
+
     public Player player;
+    
+    [SerializeField] GameManager gameManager;
 
     private Rigidbody rb;
     private Coroutine tiltCoroutine;
@@ -100,6 +104,11 @@ public class PlayerController : MonoBehaviour{
                 FindObjectOfType<GameManager>().EndGame();
             }
         }
+    }
+
+    void OnTriggerEnter(Collider collider){
+        gameManager.HandleCapture(collider.tag);
+        Destroy(collider.gameObject);
     }
 }
 

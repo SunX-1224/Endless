@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - Obstacle
+  - Shard
   layers:
   - Default
   - TransparentFX
