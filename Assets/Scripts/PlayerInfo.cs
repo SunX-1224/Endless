@@ -19,6 +19,11 @@ public class PlayerInfo : MonoBehaviour {
         PlayerPrefs.SetInt("shipIndex", i);
     }
 
+    public static void SetShipsUnlockMask(int i){
+        int mask = PlayerPrefs.GetInt("shipUnlockMask", 1);
+        PlayerPrefs.SetInt("shipUnlockMask", mask | 1<<i);
+    }
+
     public static int GetHighScore(){
         return PlayerPrefs.GetInt("highScore", 0);
     }
@@ -29,5 +34,9 @@ public class PlayerInfo : MonoBehaviour {
 
     public static int GetShipIndex(){
         return PlayerPrefs.GetInt("shipIndex", 0);
+    }
+
+    public static int GetShipsUnlockMask(){
+        return PlayerPrefs.GetInt("shipUnlockMask", 1);
     }
 }

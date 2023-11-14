@@ -677,6 +677,8 @@ MonoBehaviour:
   cameraController: {fileID: 1646363261}
   playerPrefabs:
   - {fileID: 5642428335398630486, guid: 3c38c08951744882ebf2421ed277d325, type: 3}
+  - {fileID: 1450557558572707578, guid: 685158f4de256cf119fe9cfe6d2d3295, type: 3}
+  - {fileID: 5459939246634251604, guid: f419b578c2f84a929bcfdfc598b2edc5, type: 3}
   levels:
   - {fileID: 2153018815843600339, guid: ef737ad8521c3db83b0a1b2627f89012, type: 3}
 --- !u!114 &702195580

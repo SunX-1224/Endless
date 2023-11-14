@@ -8,15 +8,15 @@ public class PlayerController: MonoBehaviour{
 
     GameManager gameManager;
     
-    public bool isAlive;
+    public bool isAlive = true;
     public int jumps;
     public int shields;
 
     public bool boostActive;
 
     public Vector3 targetTilt;
-    public Vector3 maxTilt;
-
+    
+    Vector3 maxTilt = new Vector3(20,0, 30);
     Rigidbody rb;
     Coroutine tiltCoroutine;
     Ship ship;
