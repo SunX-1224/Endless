@@ -2,17 +2,18 @@
 
 # TODO
 Environment : 
-	1. Obstacles design planning and modelling
-	2. Different environments aesthetics planning
+	1. Obstacles design planning 
+	2. Obstacles modelling
+	3. Obstacles integration on game world
+	4. Different environments aesthetics planning
 
-Character :
+Player:
 	1. Designs
-		> Design a character model
+		> Design multiple player (spaceship) models < DONE >
+		> Model integration in game < DONE >
 		> Materials and Textures for character
-		> Particles emission and shading
-
-	2. Animation
-		> Crash animation
+		> Constant particles emission 
+		> Event based particles emission
 
 	3. Controls
 		> Dynamic FOV < DONE >
@@ -23,7 +24,7 @@ Character :
 	4. Abilities
 		> Booster < DONE >
 		> Jump < DONE >
-		> Shield
+		> Shield < DONE >
 
 Gameplay :
 	1. Endless environment generation
@@ -36,7 +37,6 @@ Gameplay :
 	2. Scoring methods
 		> Score Method Implementation (Shards) < DONE >
 		> Shards design
-		> Shards capture audio
 
 	3. In-play Powerups
 		> *Abilities* design
@@ -44,9 +44,13 @@ Gameplay :
 
 	4. Main menu
 		> Game logo Design < UNDER WORK >
+		> Logo Integration < UNDER WORK >
 		> Menu design < DONE >
 		> Menu programming < DONE >
-		> Logo Integration
+		> Settings design < DONE >
+		> Settings programming < DONE >
+		> In-game store design < DONE >
+		> In-game store programming < DONE >
 
 	5. Game state controls
 		> Pause menu design < DONE >
@@ -55,14 +59,21 @@ Gameplay :
 		> Game over screen Programming < DONE >
 		> PLayer Data storage < DONE >
 
-	6. Project Build
+	6. Audio Programming
+		> In-Game music
+		> *Abilities* capture audio
+		> Shards capture audio
+		> UI events audio (clicks and transitions)
+		> Environment based gameplay audio 
+
+	7. Project Build
 		> Implement controls for Android/IOS devices
 		> Splash Screen
 		> Build project
 	
-	7. Deploy project
+	8. Deploy project
 		> Google playstore Account 
 		> Deploy game on store
 	
-	8. Extras
+	9. Extras
 		> Nothing yet <

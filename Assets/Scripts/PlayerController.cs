@@ -89,7 +89,7 @@ public class PlayerController: MonoBehaviour{
         }
         
         rb.AddForce(force);
-        rb.velocity = new Vector3(rb.velocity.x, rb.velocity.y, Mathf.Clamp(rb.velocity.z, 0, 24f));
+        rb.velocity = new Vector3(Math.Clamp(rb.velocity.x, -24f, 24f), rb.velocity.y, Mathf.Clamp(rb.velocity.z, 0, 24f));
 
     }
 

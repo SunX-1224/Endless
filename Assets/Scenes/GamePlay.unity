@@ -671,6 +671,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 17fa75da56c5e4415a2931d2bce75461, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mesh: {fileID: -5495902117074765545, guid: 407dbdfe13ac2125aa0e2a31d30d7502, type: 3}
   overlay: {fileID: 72920491}
   ingameScore: {fileID: 1276941733}
   shardsText: {fileID: 272085840}
@@ -986,11 +987,11 @@ RectTransform:
   - {fileID: 789170928}
   m_Father: {fileID: 689664601}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0}
-  m_AnchorMax: {x: 0.5, y: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 200, y: 60}
-  m_Pivot: {x: 0.5, y: 0}
+  m_Pivot: {x: 0, y: 0}
 --- !u!114 &749348636
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2327,11 +2328,11 @@ RectTransform:
   - {fileID: 1559261742}
   m_Father: {fileID: 421030059}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0}
-  m_AnchorMax: {x: 0.5, y: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 200, y: 60}
-  m_Pivot: {x: 0.5, y: 0}
+  m_Pivot: {x: 0, y: 0}
 --- !u!114 &1552936200
 MonoBehaviour:
   m_ObjectHideFlags: 0

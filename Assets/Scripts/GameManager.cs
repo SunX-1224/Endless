@@ -39,7 +39,7 @@ public class GameManager : MonoBehaviour
 
         GameObject _p = Instantiate(playerPrefabs[PlayerInfo.GetShipIndex()], transform);
         player = _p.GetComponent<PlayerController>();
-        
+
         cameraController.SetPlayerController(player);
 
         overlay.gameObject.SetActive(true);
