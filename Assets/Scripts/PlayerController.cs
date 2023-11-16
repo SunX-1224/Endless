@@ -16,7 +16,7 @@ public class PlayerController: MonoBehaviour{
 
     public Vector3 targetTilt;
     
-    Vector3 maxTilt = new Vector3(20,0, 30);
+    Vector3 maxTilt = new Vector3(20,0, 45);
     Rigidbody rb;
     Coroutine tiltCoroutine;
     Ship ship;
@@ -47,6 +47,7 @@ public class PlayerController: MonoBehaviour{
         if(!isAlive) return;
 
         Vector3 force = new(0, 0, 0);
+        float velx = 0;
         force.z = ship.thrust;
         targetTilt.y = 0;
 
@@ -64,10 +65,10 @@ public class PlayerController: MonoBehaviour{
         }
 
         if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow)){
-            force.x -= ship.turnPower;
+            velx = -ship.turnPower;
             targetTilt.z = maxTilt.z;
         }else if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow)){
-            force.x += ship.turnPower;
+            velx = ship.turnPower;
             targetTilt.z = -maxTilt.z;
         }else{
             targetTilt.z = 0f;
@@ -89,7 +90,7 @@ public class PlayerController: MonoBehaviour{
         }
         
         rb.AddForce(force);
-        rb.velocity = new Vector3(Math.Clamp(rb.velocity.x, -24f, 24f), rb.velocity.y, Mathf.Clamp(rb.velocity.z, 0, 24f));
+        rb.velocity = new Vector3(velx, rb.velocity.y, Mathf.Clamp(rb.velocity.z, 0, 20f));
 
     }
 
@@ -97,7 +98,7 @@ public class PlayerController: MonoBehaviour{
         if(!isAlive) return;
 
         Quaternion targetRotation = Quaternion.Euler(targetTilt);
-        transform.localRotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * ship.turnPower);
+        transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * ship.turnPower);
     }
 
 

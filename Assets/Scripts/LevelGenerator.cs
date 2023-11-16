@@ -57,7 +57,7 @@ public class LevelGenerator : MonoBehaviour{
     void generateChunk(Vector2 coord){
         //level generation logic goes here
         int type;
-        if(coord.y > (mapSize - 2) || coord.y <= 2)
+        if(coord.y > (mapSize - 1) || coord.y <= 1)
             type = 0;
         else
             type = Random.Range(0, chunkTypes.Count);

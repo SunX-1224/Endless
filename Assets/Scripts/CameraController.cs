@@ -6,9 +6,9 @@ public class CameraController : MonoBehaviour
 {
     float initialFOV = 60f;
     float zoomFOV = 75f;
-    Vector3 offset = new(0f, 0.4f, -1.2f);
-    
-    Coroutine fovCoroutine; 
+    Vector3 offset = new(0f, 0.105f, -0.2f);
+
+    Coroutine fovCoroutine;
     Camera cam;
     PlayerController player = null;
 
@@ -18,11 +18,11 @@ public class CameraController : MonoBehaviour
     }
 
     void Update(){
-        if(!player) return;
+        if (!player) return;
 
-        if(player.boostActive) IncreaseFOV(player.GetForce());
+        if (player.boostActive) IncreaseFOV(player.GetForce());
         else ResetFOV(3.0f);
-        TiltCamera(player.targetTilt, player.GetTurnPower());
+        //TiltCamera(player.targetTilt, player.GetTurnPower());
         transform.position = player.transform.position + offset;
     }
 
@@ -31,23 +31,26 @@ public class CameraController : MonoBehaviour
     }
 
     void IncreaseFOV(float speed){
-        if(fovCoroutine != null){
+        if (fovCoroutine != null)
+        {
             StopCoroutine(fovCoroutine);
         }
         fovCoroutine = StartCoroutine(ChangeFOV(zoomFOV, speed));
     }
 
     void ResetFOV(float speed){
-        if(fovCoroutine != null){
+        if (fovCoroutine != null)
+        {
             StopCoroutine(fovCoroutine);
         }
         fovCoroutine = StartCoroutine(ChangeFOV(initialFOV, speed));
     }
-    
+
     IEnumerator ChangeFOV(float targetFOV, float speed){
         float currentFOV = cam.fieldOfView;
 
-        while(Mathf.Abs(currentFOV - targetFOV) > 0.01f){
+        while (Mathf.Abs(currentFOV - targetFOV) > 0.01f)
+        {
             currentFOV = Mathf.Lerp(currentFOV, targetFOV, Time.deltaTime * speed);
             cam.fieldOfView = currentFOV;
             yield return null;
@@ -57,8 +60,8 @@ public class CameraController : MonoBehaviour
     }
 
     public void TiltCamera(Vector3 targetTilt, float speed){
-        targetTilt.x = transform.rotation.x;
+        targetTilt.x = 11f;
         Quaternion targetRotation = Quaternion.Euler(targetTilt);
-        transform.localRotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * speed);
+        transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * speed);
     }
 }
