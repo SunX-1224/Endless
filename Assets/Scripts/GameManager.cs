@@ -6,6 +6,7 @@ using TMPro;
 
 public class GameManager : MonoBehaviour
 {
+    [SerializeField] Mesh mesh;
     [SerializeField] RawImage overlay;
     [SerializeField] TMP_Text ingameScore;
     [SerializeField] TMP_Text shardsText;

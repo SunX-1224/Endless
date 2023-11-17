@@ -16,7 +16,7 @@ public class PlayerController: MonoBehaviour{
 
     public Vector3 targetTilt;
     
-    Vector3 maxTilt = new Vector3(20,0, 45);
+    Vector3 maxTilt = new Vector3(20,0, 50);
     Rigidbody rb;
     Coroutine tiltCoroutine;
     Ship ship;
@@ -25,6 +25,8 @@ public class PlayerController: MonoBehaviour{
         gameManager = GetComponentInParent<GameManager>();
         ship = GetComponent<Ship>();
         rb = GetComponent<Rigidbody>();
+
+        rb.velocity = new(0,0,ship.velocity);
     }
 
     void Update(){
@@ -36,43 +38,30 @@ public class PlayerController: MonoBehaviour{
     }
 
     public float GetForce(){
-        return ship.boost + ship.thrust;
+        return ship.boost; 
     }
 
     public float GetTurnPower(){
-        return ship.turnPower;
+        return ship.turnVelocity;
     }
 
     void HandleControls(){
         if(!isAlive) return;
 
         Vector3 force = new(0, 0, 0);
-        float velx = 0;
-        force.z = ship.thrust;
+        float vx = rb.velocity.x;
+
         targetTilt.y = 0;
 
-        if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow)){
-            force.z += ship.boost;
-            boostActive = true;
-        }else{
-            boostActive = false;
-            if (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow)){
-                force.z -= ship.boost;
-                targetTilt.x = -maxTilt.x;
-            }else{
-                targetTilt.x = 0f;
-            }
-        }
+        float h = Input.GetAxis("Horizontal");
+        float v = Input.GetAxis("Vertical");
+        
+        force.z = ship.boost * v;
+        targetTilt.x = Mathf.Min(maxTilt.x * v, 0f);
+        vx = ship.turnVelocity * h;
+        targetTilt.z = -maxTilt.z * h;
 
-        if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow)){
-            velx = -ship.turnPower;
-            targetTilt.z = maxTilt.z;
-        }else if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow)){
-            velx = ship.turnPower;
-            targetTilt.z = -maxTilt.z;
-        }else{
-            targetTilt.z = 0f;
-        }
+        boostActive = force.z > 0f;
 
         if (rb.useGravity && transform.position.y < 0f){
             rb.useGravity = false;
@@ -83,22 +72,20 @@ public class PlayerController: MonoBehaviour{
         if (Input.GetKey(KeyCode.Space)){
             if (!rb.useGravity && jumps > 0){
                 jumps--;
-                rb.constraints = RigidbodyConstraints.FreezeRotationY;
-                rb.AddForce(0, ship.jumpPower, 0);
+                rb.constraints = RigidbodyConstraints.None;
+                rb.AddForce(0, ship.jumpForce, 0);
                 rb.useGravity = true;
             }
         }
         
         rb.AddForce(force);
-        rb.velocity = new Vector3(velx, rb.velocity.y, Mathf.Clamp(rb.velocity.z, 0, 20f));
-
+        rb.velocity = new(vx, rb.velocity.y, Mathf.Clamp(rb.velocity.z, ship.velocity, 36f)); 
     }
 
     void TiltPlayer(){
-        if(!isAlive) return;
-
+            
         Quaternion targetRotation = Quaternion.Euler(targetTilt);
-        transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * ship.turnPower);
+        transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, ship.turnVelocity);            
     }
 
 
