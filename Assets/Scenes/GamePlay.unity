@@ -15,7 +15,7 @@ RenderSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 9
   m_Fog: 1
-  m_FogColor: {r: 0.7708602, g: 0.7708602, b: 0.7708602, a: 1}
+  m_FogColor: {r: 0.24690849, g: 0.23794064, b: 0.23794064, a: 1}
   m_FogMode: 3
   m_FogDensity: 0.05
   m_LinearFogStart: 0
@@ -26,7 +26,7 @@ RenderSettings:
   m_AmbientIntensity: 1
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.30360562, g: 0.32129207, b: 0.3660978, a: 1}
-  m_SkyboxMaterial: {fileID: 2100000, guid: a23ead4982181cec398af33a65b4c172, type: 2}
+  m_SkyboxMaterial: {fileID: 2100000, guid: 4c9569c89586d3627b4a6a6453fca33e, type: 2}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
+  m_IndirectSpecularColor: {r: 0.5455712, g: 0.6311125, b: 0.739951, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -671,15 +671,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 17fa75da56c5e4415a2931d2bce75461, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mesh: {fileID: 0}
   overlay: {fileID: 72920491}
   ingameScore: {fileID: 1276941733}
   shardsText: {fileID: 272085840}
   cameraController: {fileID: 1646363261}
   playerPrefabs:
-  - {fileID: 5642428335398630486, guid: 3c38c08951744882ebf2421ed277d325, type: 3}
-  - {fileID: 1450557558572707578, guid: 685158f4de256cf119fe9cfe6d2d3295, type: 3}
-  - {fileID: 5459939246634251604, guid: f419b578c2f84a929bcfdfc598b2edc5, type: 3}
+  - {fileID: 8762382214693907880, guid: 45acd0a32bbb8ef1c98ddd63a8221012, type: 3}
+  - {fileID: 885086661860612609, guid: 6a55a4825fdb0ea45aba048455bfbd0c, type: 3}
+  - {fileID: 6152098045575856226, guid: 6fc197e8f4247bad084f7ce4856782a5, type: 3}
   levels:
   - {fileID: 2153018815843600339, guid: ef737ad8521c3db83b0a1b2627f89012, type: 3}
 --- !u!114 &702195580
@@ -812,13 +811,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 705507993}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.40821788, y: -0.23456968, z: 0.10938163, w: 0.8754261}
+  m_LocalRotation: {x: 0.40707156, y: -0.23471268, z: 0.10907447, w: 0.87595975}
   m_LocalPosition: {x: 0, y: 3, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+  m_LocalEulerAnglesHint: {x: 49.85, y: -30, z: 0}
 --- !u!1 &733692676
 GameObject:
   m_ObjectHideFlags: 0
@@ -2590,13 +2589,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1646363257}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.095845714, y: 0, z: 0, w: 0.99539626}
-  m_LocalPosition: {x: 1.244, y: 0.22099999, z: 1.206}
+  m_LocalRotation: {x: 0.08715578, y: 0, z: 0, w: 0.9961947}
+  m_LocalPosition: {x: 0, y: 0.2, z: -0.4}
   m_LocalScale: {x: 0.375, y: 0.4021543, z: 0.49967694}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 11, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 10, y: 0, z: 0}
 --- !u!81 &1646363259
 AudioListener:
   m_ObjectHideFlags: 0
@@ -2615,7 +2614,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 1}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -2636,8 +2635,8 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: 0.05
-  far clip plane: 500
+  near clip plane: 0.1
+  far clip plane: 1000
   field of view: 60
   orthographic: 0
   orthographic size: 5
@@ -2668,6 +2667,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9cb3ba6f05a91152687eb0e66d17761d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  offset: {x: 0, y: 0.2, z: -0.4}
 --- !u!1 &1680080595
 GameObject:
   m_ObjectHideFlags: 0

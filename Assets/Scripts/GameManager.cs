@@ -4,13 +4,11 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-public class GameManager : MonoBehaviour
-{
-    [SerializeField] Mesh mesh;
+public class GameManager : MonoBehaviour {
     [SerializeField] RawImage overlay;
     [SerializeField] TMP_Text ingameScore;
     [SerializeField] TMP_Text shardsText;
-    
+
     [SerializeField] CameraController cameraController;
 
     [SerializeField] List<GameObject> playerPrefabs;
@@ -21,7 +19,7 @@ public class GameManager : MonoBehaviour
 
     GameObject currentLevel;
     PlayerController player;
-    
+
     int totalScore;
     int levelScore;
     int shards;
@@ -48,43 +46,51 @@ public class GameManager : MonoBehaviour
     }
 
     void Update(){
-        if(player.isAlive && LevelGenerator.levelCompleted){
+        if (player.isAlive && LevelGenerator.levelCompleted){
             StartCoroutine(HandleTransition());
         }
 
-        if(Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape))
             HandlePause();
-        
+
         HandleScoreUpdate();
         SetStatusUI();
     }
 
     public void HandleScoreUpdate(){
-        levelScore = (int) player.transform.position.z;
+        levelScore = (int)player.transform.position.z;
     }
 
     public void HandlePause(){
-        if(gameOver) return;
+        if (gameOver) return;
 
-        if(gamePaused){
+        if (gamePaused)
+        {
             GetComponent<PauseMenu>().Resume();
             overlay.gameObject.SetActive(true);
-        } else{
+        }
+        else
+        {
             GetComponent<PauseMenu>().Pause();
             overlay.gameObject.SetActive(false);
         }
     }
 
     public void HandleCapture(string tag){
-        if(tag == "Shard"){
+        if (tag == "Shard")
+        {
             totalScore += 20;
             shards++;
-        }else if(tag == "Jump"){
+        }
+        else if (tag == "Jump")
+        {
             player.jumps++;
-        }else if(tag == "Shield"){
+        }
+        else if (tag == "Shield")
+        {
             player.shields++;
         }
-            
+
     }
 
     public void EndGame(){
@@ -105,14 +111,15 @@ public class GameManager : MonoBehaviour
     public int GetScore(){
         return totalScore + levelScore;
     }
-    
+
     IEnumerator HandleTransition(bool initState = false){
         float a = 0f;
-        while(a < 1f && !initState){
+        while (a < 1f && !initState)
+        {
             a = Mathf.Clamp01(a + Time.deltaTime);
             Color _c = overlay.color;
             _c.a = a;
-            overlay.color = _c; 
+            overlay.color = _c;
             yield return null;
         }
         player.transform.position = Vector3.zero;
@@ -121,7 +128,7 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSeconds(0.3f);
 
         a = 1.0f;
-        while(a > 0f){
+        while (a > 0f){
             a = Mathf.Clamp01(a - Time.deltaTime);
             Color _c = overlay.color;
             _c.a = a;
@@ -134,10 +141,11 @@ public class GameManager : MonoBehaviour
         totalScore += levelScore;
         levelScore = 0;
 
-       if(currentLevel){
+        if (currentLevel){
             Destroy(currentLevel);
             currentLevel = Instantiate(levels[Random.Range(0, levels.Count)], this.transform);
-        }else{
+        }
+        else{
             currentLevel = Instantiate(levels[0], this.transform);
         }
         currentLevel.transform.position = Vector3.zero;

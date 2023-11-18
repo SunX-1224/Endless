@@ -2,16 +2,16 @@
 
 # TODO
 Environment : 
-	1. Obstacles design planning 
-	2. Obstacles modelling
-	3. Obstacles integration on game world
+	1. Obstacles design planning  < DONE >
+	2. Obstacles modelling < DONE >
+	3. Obstacles integration on game world < DONE >
 	4. Different environments aesthetics planning
 
 Player:
 	1. Designs
 		> Design multiple player (spaceship) models < DONE >
 		> Model integration in game < DONE >
-		> Materials and Textures for character
+		> Materials and Textures for character < DONE >
 		> Constant particles emission 
 		> Event based particles emission
 
@@ -30,21 +30,23 @@ Gameplay :
 	1. Endless environment generation
 		> Chunk-wise Level Generation < DONE >
 		> Obstacles generation < DONE >
+		> Collapsing Level Generation Logic
+		> Redundant Chunk Destroying Logic
 		> Fog effect < DONE >
 		> Level Ending and Transition < DONE >
 		> Day night cycle programming
 
 	2. Scoring methods
 		> Score Method Implementation (Shards) < DONE >
-		> Shards design
+		> Shards design < DONE >
 
 	3. In-play Powerups
-		> *Abilities* design
-		> *Abilities* capture
+		> *Abilities* design < DONE >
+		> *Abilities* capture < DONE >
 
 	4. Main menu
-		> Game logo Design < UNDER WORK >
-		> Logo Integration < UNDER WORK >
+		> Game logo Design
+		> Logo Integration
 		> Menu design < DONE >
 		> Menu programming < DONE >
 		> Settings design < DONE >

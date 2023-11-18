@@ -2,8 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class LevelGenerator : MonoBehaviour{
-    
+
     Transform player;
     public List<GameObject> chunkTypes;
 
@@ -60,7 +61,7 @@ public class LevelGenerator : MonoBehaviour{
         if(coord.y > (mapSize - 1) || coord.y <= 1)
             type = 0;
         else
-            type = Random.Range(0, chunkTypes.Count);
+            type = UnityEngine.Random.Range(0, chunkTypes.Count);
 
         // finally store the chunkData
         GameObject chunk = Instantiate(chunkTypes[type], this.transform);
@@ -70,7 +71,7 @@ public class LevelGenerator : MonoBehaviour{
     public void setPlayerTransform(Transform _player){
         player = _player;
     }
-
+  
     public class Chunk{
         
         GameObject meshObject;
@@ -101,4 +102,6 @@ public class LevelGenerator : MonoBehaviour{
             return meshObject.activeSelf;
         }
     }
-}
+} 
+
+

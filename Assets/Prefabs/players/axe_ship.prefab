@@ -10,15 +10,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 407dbdfe13ac2125aa0e2a31d30d7502, type: 3}
       propertyPath: m_LocalScale.x
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 407dbdfe13ac2125aa0e2a31d30d7502, type: 3}
       propertyPath: m_LocalScale.y
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 407dbdfe13ac2125aa0e2a31d30d7502, type: 3}
       propertyPath: m_LocalScale.z
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 407dbdfe13ac2125aa0e2a31d30d7502, type: 3}
       propertyPath: m_LocalPosition.x
@@ -34,11 +34,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 407dbdfe13ac2125aa0e2a31d30d7502, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.7071068
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 407dbdfe13ac2125aa0e2a31d30d7502, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0.7071068
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 407dbdfe13ac2125aa0e2a31d30d7502, type: 3}
       propertyPath: m_LocalRotation.y
@@ -46,7 +46,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 407dbdfe13ac2125aa0e2a31d30d7502, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 407dbdfe13ac2125aa0e2a31d30d7502, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -105,8 +105,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.19772409, y: 0.10933366, z: 0.022482714}
-  m_Center: {x: 0, y: 0.0063975807, z: 0.0008062618}
+  m_Size: {x: 0.19772409, y: 0.023493, z: 0.103044756}
+  m_Center: {x: 0, y: 0.02467082, z: 0.018324595}
 --- !u!54 &5912421887729058849
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -146,9 +146,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86131018ade126d2d8be9199bd14f0f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  velocity: 12
+  velocity: 18
   boost: 2
-  turnVelocity: 12
+  turnVelocity: 15
   jumpForce: 70
 --- !u!114 &4276322066538312645
 MonoBehaviour:

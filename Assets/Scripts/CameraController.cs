@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
-    float initialFOV = 60f;
-    float zoomFOV = 75f;
-    Vector3 offset = new(0f, 0.105f, -0.2f);
+    float initialFOV = 70f;
+    float zoomFOV = 85f;
+    [SerializeField] Vector3 offset = new(0f, 0.2f, -0.4f);
 
     Coroutine fovCoroutine;
     Camera cam;

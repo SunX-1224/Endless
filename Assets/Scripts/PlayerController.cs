@@ -30,10 +30,12 @@ public class PlayerController: MonoBehaviour{
     }
 
     void Update(){
+        if(!isAlive) return;
         TiltPlayer();
     }
 
     void FixedUpdate(){
+        if(!isAlive) return;
         HandleControls();
     }
 
