@@ -5,6 +5,9 @@ using UnityEngine;
 public class ChunkData : MonoBehaviour {
     
     public int id;
-    public List<int> exclude;
-    public GameObject chunk;
+    public List<int> neighbours;
+
+    public int GetRandomNeighbour(){
+        return neighbours[Random.Range(0, neighbours.Count)];
+    }
 }

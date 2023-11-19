@@ -60,19 +60,27 @@ public class LevelGenerator : MonoBehaviour{
         }
     }
 
-    void generateChunk(Vector2 coord){
-        //level generation logic goes here
-        int type;
-        if(coord.y > (mapSize - 1) || coord.y <= 1)
-            type = 0;
-        else
-            type = UnityEngine.Random.Range(0, chunkTypes.Count);
+    int GetChunkID(Vector2 coord){
+        if(coord.y > (mapSize -1) || coord.y <= 2) return 0;
 
-        // finally store the chunkData
-        GameObject chunk = Instantiate(chunkTypes[type], this.transform);
-        chunksInWorld.Add(coord, new Chunk(coord, chunkSize, chunk));
+        coord.y -= 1f;
+        if(!chunksInWorld.ContainsKey(coord)) return chunkTypes[0].GetComponent<ChunkData>().GetRandomNeighbour();
+        
+        return GetChunkData(chunksInWorld[coord]).GetRandomNeighbour();        
+    }
+
+    void generateChunk(Vector2 coord){
+        int id = GetChunkID(coord);
+        
+        GameObject chunk = Instantiate(chunkTypes.Find(x=>(x.GetComponent<ChunkData>().id == id)), this.transform);
+        chunksInWorld.Add(coord, new Chunk(coord, chunkSize, chunk, id));
     }
     
+    public ChunkData GetChunkData(Chunk chunk){
+        GameObject _chunk = chunkTypes.Find(x => x.GetComponent<ChunkData>().id == chunk.id);
+        return _chunk.GetComponent<ChunkData>();
+    }
+
     public void setPlayerTransform(Transform _player){
         player = _player;
     }
@@ -82,8 +90,10 @@ public class LevelGenerator : MonoBehaviour{
         GameObject meshObject;
         Vector2 position;
         Bounds bounds;
+        public int id;
 
-        public Chunk(Vector2 coord, int size, GameObject mesh){
+        public Chunk(Vector2 coord, int size, GameObject mesh, int _id){
+            id = _id;
             position = coord * size;
             bounds = new Bounds(position, Vector2.one * size);
             meshObject = mesh;
@@ -96,6 +106,7 @@ public class LevelGenerator : MonoBehaviour{
             SetVisible(InRange());
         }
 
+        
         public bool InRange(){
             float playerDist = Mathf.Sqrt(bounds.SqrDistance(playerPosition));
             return playerDist <= maxViewDist;

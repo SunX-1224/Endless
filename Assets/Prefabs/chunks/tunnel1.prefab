@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 5869704457618100808}
   - component: {fileID: 8614534580407862941}
   - component: {fileID: 6377183273976651756}
+  - component: {fileID: 4120128640579126309}
   m_Layer: 0
   m_Name: tunnel1
   m_TagString: Obstacle
@@ -86,6 +87,20 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &4120128640579126309
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3122687136690888540}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 555a1c447a25cf475aaed2fd018c3fab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  id: 3
+  neighbours: 00000000010000000200000003000000040000000700000008000000
 --- !u!1001 &4105602311874616091
 PrefabInstance:
   m_ObjectHideFlags: 0

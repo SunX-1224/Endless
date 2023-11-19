@@ -124,6 +124,7 @@ public class GameManager : MonoBehaviour {
         }
         player.transform.position = Vector3.zero;
         player.transform.rotation = Quaternion.identity;
+        player.minVelocity += 4f*Time.deltaTime;
         GenerateNewLevel();
         yield return new WaitForSeconds(0.3f);
 

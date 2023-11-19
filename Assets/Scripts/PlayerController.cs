@@ -21,11 +21,14 @@ public class PlayerController: MonoBehaviour{
     Coroutine tiltCoroutine;
     Ship ship;
 
+    public float minVelocity;
+
     void Start(){
         gameManager = GetComponentInParent<GameManager>();
         ship = GetComponent<Ship>();
         rb = GetComponent<Rigidbody>();
-
+        
+        minVelocity = 18f;
         rb.velocity = new(0,0,ship.velocity);
     }
 
@@ -81,7 +84,7 @@ public class PlayerController: MonoBehaviour{
         }
         
         rb.AddForce(force);
-        rb.velocity = new(vx, rb.velocity.y, Mathf.Clamp(rb.velocity.z, ship.velocity, 36f)); 
+        rb.velocity = new(vx, rb.velocity.y, Mathf.Clamp(rb.velocity.z, minVelocity, 36f)); 
     }
 
     void TiltPlayer(){
