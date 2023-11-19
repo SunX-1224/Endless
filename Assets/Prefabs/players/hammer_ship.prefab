@@ -167,7 +167,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isAlive: 1
-  jumps: 0
+  jumps: 1
   shields: 0
   boostActive: 0
   targetTilt: {x: 0, y: 0, z: 0}
