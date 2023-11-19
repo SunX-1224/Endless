@@ -17,7 +17,7 @@ public class LevelGenerator : MonoBehaviour{
     
     int endLine;
     int chunksInViewDist;
-    Dictionary<Vector2, Chunk> chunkData = new Dictionary<Vector2, Chunk>();
+    Dictionary<Vector2, Chunk> chunksInWorld = new Dictionary<Vector2, Chunk>();
     List<Vector2> lastFrameChunks = new List<Vector2>();
 
     void Start(){
@@ -33,20 +33,25 @@ public class LevelGenerator : MonoBehaviour{
     }
 
     void UpdateVisibleChunks(){
-        foreach (Vector2 chunkCoord in lastFrameChunks){
-            chunkData[chunkCoord].SetVisible(false);    
-        }
-        lastFrameChunks.Clear();
-
         int curChunkCoordX = Mathf.RoundToInt(playerPosition.x / chunkSize);
         int curChunkCoordY = Mathf.RoundToInt(playerPosition.y / chunkSize);
+
+        foreach (Vector2 chunkCoord in lastFrameChunks){
+            if(chunkCoord.y < curChunkCoordY || !chunksInWorld[chunkCoord].InRange() ){
+                chunksInWorld.Remove(chunkCoord, out Chunk c);
+                c.DestroySelf();
+            }else {
+                chunksInWorld[chunkCoord].SetVisible(false);
+            }
+        }
+        lastFrameChunks.Clear();
 
         for (int yOffset = 0; yOffset < chunksInViewDist; yOffset++){
             for (int xOffset = -chunksInViewDist; xOffset < chunksInViewDist; xOffset++){
                 Vector2 chunkCoord = new(xOffset+curChunkCoordX, yOffset+curChunkCoordY); 
 
-                if(chunkData.ContainsKey(chunkCoord)){
-                    chunkData[chunkCoord].UpdateChunk();
+                if(chunksInWorld.ContainsKey(chunkCoord)){
+                    chunksInWorld[chunkCoord].UpdateChunk();
                 }else{
                     generateChunk(chunkCoord); 
                 }
@@ -65,7 +70,7 @@ public class LevelGenerator : MonoBehaviour{
 
         // finally store the chunkData
         GameObject chunk = Instantiate(chunkTypes[type], this.transform);
-        chunkData.Add(coord, new Chunk(coord, chunkSize, chunk));
+        chunksInWorld.Add(coord, new Chunk(coord, chunkSize, chunk));
     }
     
     public void setPlayerTransform(Transform _player){
@@ -88,10 +93,12 @@ public class LevelGenerator : MonoBehaviour{
         }
         
         public void UpdateChunk(){
-            float playerDist = Mathf.Sqrt(bounds.SqrDistance(playerPosition));
-            bool visible = playerDist <= maxViewDist;
+            SetVisible(InRange());
+        }
 
-            SetVisible(visible);
+        public bool InRange(){
+            float playerDist = Mathf.Sqrt(bounds.SqrDistance(playerPosition));
+            return playerDist <= maxViewDist;
         }
 
         public void SetVisible(bool visibility){
@@ -100,6 +107,10 @@ public class LevelGenerator : MonoBehaviour{
 
         public bool isVisible(){
             return meshObject.activeSelf;
+        }
+
+        public void DestroySelf(){
+            Destroy(meshObject);
         }
     }
 } 

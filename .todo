@@ -31,7 +31,7 @@ Gameplay :
 		> Chunk-wise Level Generation < DONE >
 		> Obstacles generation < DONE >
 		> Collapsing Level Generation Logic
-		> Redundant Chunk Destroying Logic
+		> Redundant Chunk Destroying Logic < DONE >
 		> Fog effect < DONE >
 		> Level Ending and Transition < DONE >
 		> Day night cycle programming
