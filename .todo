@@ -62,9 +62,9 @@ Gameplay :
 		> PLayer Data storage < DONE >
 
 	6. Audio Programming
-		> In-Game music
-		> *Abilities* capture audio
-		> Shards capture audio
+		> In-Game music < DONE >
+		> *Abilities* capture audio < DONE >
+		> Shards capture audio < DONE >
 		> UI events audio (clicks and transitions)
 		> Environment based gameplay audio 
 
@@ -77,5 +77,7 @@ Gameplay :
 		> Google playstore Account 
 		> Deploy game on store
 	
-	9. Extras
-		> Nothing yet <
+	9. Bugs Fix
+		> Level Transition overlay bug in coroutine
+
+

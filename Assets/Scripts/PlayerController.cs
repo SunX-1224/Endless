@@ -23,7 +23,7 @@ public class PlayerController: MonoBehaviour{
 
     public float minVelocity;
 
-    void Start(){
+    void Awake(){
         gameManager = GetComponentInParent<GameManager>();
         ship = GetComponent<Ship>();
         rb = GetComponent<Rigidbody>();
@@ -42,6 +42,12 @@ public class PlayerController: MonoBehaviour{
         HandleControls();
     }
 
+    public void HandleTransition(){
+        transform.position = Vector3.zero;
+        minVelocity += 4f * Time.deltaTime;
+        rb.velocity = new(0f, 0f, minVelocity);
+    }
+
     public float GetForce(){
         return ship.boost; 
     }
@@ -51,7 +57,6 @@ public class PlayerController: MonoBehaviour{
     }
 
     void HandleControls(){
-        if(!isAlive) return;
 
         Vector3 force = new(0, 0, 0);
         float vx = rb.velocity.x;
@@ -79,6 +84,7 @@ public class PlayerController: MonoBehaviour{
                 jumps--;
                 rb.constraints = RigidbodyConstraints.None;
                 rb.AddForce(0, ship.jumpForce, 0);
+                AudioManager.instance.PlaySFX("jump");
                 rb.useGravity = true;
             }
         }
@@ -95,13 +101,17 @@ public class PlayerController: MonoBehaviour{
 
 
     void OnTriggerEnter(Collider collider){
+        if(!isAlive) return;
+        
         if (collider.tag == "Obstacle"){
             if(isAlive){
                 if(shields > 0){
                     shields--;
+                    AudioManager.instance.PlaySFX("shield");
                     Destroy(collider.gameObject);
                 }else{
                     isAlive = false;
+                    AudioManager.instance.PlaySFX("death");
                     gameManager.EndGame();
                 }
             }

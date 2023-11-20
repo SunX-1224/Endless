@@ -12,6 +12,9 @@ public class MainMenu : MonoBehaviour{
     void Start(){
         highScoreText.text = $"HighScore\n{PlayerInfo.GetHighScore()}";
         shardsText.text = $"Shards\n{PlayerInfo.GetShards()}";
+
+        AudioManager.instance.StopSFX();
+        AudioManager.instance.PlayMusic("bg");
     }
 
     public void LoadMenu(){

@@ -10,15 +10,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 407dbdfe13ac2125aa0e2a31d30d7502, type: 3}
       propertyPath: m_LocalScale.x
-      value: 2
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 407dbdfe13ac2125aa0e2a31d30d7502, type: 3}
       propertyPath: m_LocalScale.y
-      value: 2
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 407dbdfe13ac2125aa0e2a31d30d7502, type: 3}
       propertyPath: m_LocalScale.z
-      value: 2
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 407dbdfe13ac2125aa0e2a31d30d7502, type: 3}
       propertyPath: m_LocalPosition.x
@@ -59,6 +59,10 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 407dbdfe13ac2125aa0e2a31d30d7502, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 407dbdfe13ac2125aa0e2a31d30d7502, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 407dbdfe13ac2125aa0e2a31d30d7502, type: 3}
       propertyPath: m_Name
@@ -167,3 +171,4 @@ MonoBehaviour:
   shields: 0
   boostActive: 0
   targetTilt: {x: 0, y: 0, z: 0}
+  minVelocity: 0

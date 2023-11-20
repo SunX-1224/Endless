@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class ChunkData : MonoBehaviour {
     
-    public int id;
     public List<int> neighbours;
 
     public int GetRandomNeighbour(){
