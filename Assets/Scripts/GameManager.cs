@@ -79,16 +79,19 @@ public class GameManager : MonoBehaviour {
         {
             totalScore += 20;
             shards++;
+            ParticleManager.instance.CaptureShard(player.transform.position);
             AudioManager.instance.PlaySFX("shardcap");
         }
         else if (tag == "Jump")
         {
             player.jumps++;
+            ParticleManager.instance.CaptureItem(player.transform.position);
             AudioManager.instance.PlaySFX("capture");
         }
         else if (tag == "Shield")
         {
             player.shields++;
+            ParticleManager.instance.CaptureItem(player.transform.position);
             AudioManager.instance.PlaySFX("capture");
         }
 

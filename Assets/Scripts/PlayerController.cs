@@ -82,15 +82,20 @@ public class PlayerController: MonoBehaviour{
         if (Input.GetKey(KeyCode.Space)){
             if (!rb.useGravity && jumps > 0){
                 jumps--;
-                rb.constraints = RigidbodyConstraints.None;
-                rb.AddForce(0, ship.jumpForce, 0);
-                AudioManager.instance.PlaySFX("jump");
-                rb.useGravity = true;
+                PushUp();
+                ParticleManager.instance.JumpEffect(transform);
             }
         }
         
         rb.AddForce(force);
         rb.velocity = new(vx, rb.velocity.y, Mathf.Clamp(rb.velocity.z, minVelocity, 36f)); 
+    }
+
+    void PushUp(){
+        rb.constraints = RigidbodyConstraints.None;
+        rb.AddForce(0, ship.jumpForce, 0);
+        AudioManager.instance.PlaySFX("jump");
+        rb.useGravity = true;
     }
 
     void TiltPlayer(){
@@ -107,10 +112,14 @@ public class PlayerController: MonoBehaviour{
             if(isAlive){
                 if(shields > 0){
                     shields--;
+                    PushUp();
                     AudioManager.instance.PlaySFX("shield");
+                    ParticleManager.instance.JumpEffect(transform);
+                    ParticleManager.instance.Explosion(transform.position + new Vector3(0f, -1f, 2f));
                     Destroy(collider.gameObject);
                 }else{
                     isAlive = false;
+                    rb.velocity = Vector3.zero;
                     AudioManager.instance.PlaySFX("death");
                     gameManager.EndGame();
                 }

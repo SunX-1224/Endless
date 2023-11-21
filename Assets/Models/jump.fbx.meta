@@ -17,6 +17,11 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: light
+    second: {fileID: 2100000, guid: ac8699072cb2e476a9ddb516b8056537, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: wings.001
     second: {fileID: 2100000, guid: c64d4c5929b936cc1af1bbf98c85fb4b, type: 2}
   materials:
