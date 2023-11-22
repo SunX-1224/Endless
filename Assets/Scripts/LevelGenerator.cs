@@ -11,16 +11,16 @@ public class LevelGenerator : MonoBehaviour{
     public const int mapSize = 20;
     public const int chunkSize = 20;
     public const float maxViewDist = 150f;
+    public Vector2 playerPosition;
 
     public static bool levelCompleted;
-    public static Vector2 playerPosition;
     
     int endLine;
     int chunksInViewDist;
     Dictionary<Vector2, Chunk> chunksInWorld = new Dictionary<Vector2, Chunk>();
     HashSet<Vector2> lastFrameChunks = new HashSet<Vector2>();
 
-    void Start(){
+    void Awake(){
         levelCompleted = false;
         chunksInViewDist = Mathf.RoundToInt(maxViewDist / chunkSize);
         endLine = mapSize * chunkSize;
@@ -92,11 +92,6 @@ public class LevelGenerator : MonoBehaviour{
             meshObject.transform.position = new Vector3(position.x, -0.5f, position.y);
         }
         
-        public bool InRange(){
-            float playerDist = Mathf.Sqrt(bounds.SqrDistance(playerPosition));
-            return playerDist <= maxViewDist;
-        }
-
         public void DestroySelf(){
             Destroy(meshObject);
         }

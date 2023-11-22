@@ -128,8 +128,7 @@ public class GameManager : MonoBehaviour {
 
     IEnumerator HandleTransition(){
         yield return Fade(0f, 1f);
-        yield return new WaitForSeconds(0.3f);
-        GenerateNewLevel();
+        if(LevelGenerator.levelCompleted) GenerateNewLevel();
         yield return Fade(1f, 0f);
     }
 
