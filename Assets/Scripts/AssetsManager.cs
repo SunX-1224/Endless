@@ -4,17 +4,19 @@ using UnityEngine.UI;
 using UnityEngine;
 using TMPro;
 
-public class StoreManager : MonoBehaviour{
+public class AssetsManager: MonoBehaviour{
 
     [SerializeField] GameObject buyPrompt;
+    [SerializeField] GameObject insuffPrompt;
     [SerializeField] TMP_Text costText;
     [SerializeField] TMP_Text shardsText;
-
+    [SerializeField] TMP_Text highScoreText;
     [SerializeField] List<GameObject> ships;
 
     int buyProcessShip = 0;
 
     void OnEnable(){
+        UpdateScoreText();
         UpdateShardsText();
         UpdateShipStatus();
     }
@@ -25,20 +27,25 @@ public class StoreManager : MonoBehaviour{
         int shipIndex = PlayerInfo.GetShipIndex();
 
         for(int i=0; i < ships.Count; i++){
-            RawImage icon = ships[i].GetComponentInChildren<RawImage>();
+            Image icon = ships[i].GetComponentInChildren<Image>();
 
             if((shipsMask & (1<<i)) > 0){
-                if(i == shipIndex) icon.color = new Color(1f,1f,1f,1f);
-                else icon.color = new Color(1f,1f,1f,0.5f);
+                if(i == shipIndex) icon.color = new Color(0.4f,1f,.8f,1f);
+                else icon.color = new Color(1f,1f,1f,0.7f);
             }else{
                 icon.color = new Color(0f,0f,0f,1f);
             }
         }
     }
 
+    void UpdateScoreText(){
+        int score = PlayerInfo.GetHighScore();
+        highScoreText.text = score.ToString();
+    }
+
     void UpdateShardsText(){
         int shards = PlayerInfo.GetShards();
-        shardsText.text = $"Shards\n{shards}";
+        shardsText.text = shards.ToString();
     }
 
     public void SelectShip(int index){
@@ -54,7 +61,7 @@ public class StoreManager : MonoBehaviour{
 
     void PromptBuy(int index){
         buyPrompt.SetActive(true);
-        costText.text = $"Unlock Ship\n{GetCost(index)} shards";
+        costText.text = $"Buy this Ship for {GetCost(index)} shards?";
         buyProcessShip = index;
     }
 
@@ -66,8 +73,11 @@ public class StoreManager : MonoBehaviour{
             PlayerInfo.SetShipIndex(buyProcessShip);
             UpdateShardsText();
             UpdateShipStatus();
+            buyPrompt.SetActive(false);
+        }else{
+            buyPrompt.SetActive(false);
+            insuffPrompt.SetActive(true);
         }
-        buyPrompt.SetActive(false);
     }
 
     int GetCost(int i){
