@@ -5,9 +5,12 @@ using UnityEngine.UI;
 using TMPro;
 
 public class GameManager : MonoBehaviour {
+
     [SerializeField] RawImage overlay;
     [SerializeField] TMP_Text ingameScore;
     [SerializeField] TMP_Text shardsText;
+    [SerializeField] TMP_Text highScoreText;
+    [SerializeField] GameObject gameOverUI;
 
     [SerializeField] CameraController cameraController;
 
@@ -15,23 +18,17 @@ public class GameManager : MonoBehaviour {
     [SerializeField] List<GameObject> levels;
 
     public static bool gameOver;
-    public static bool gamePaused;
 
     GameObject currentLevel;
     PlayerController player;
 
-    int totalScore;
-    int levelScore;
+    int score;
+    float _score;
     int shards;
     int highScore;
 
     void Start(){
-        gameOver = false;
-        gamePaused = false;
-
-        levelScore = 0;
-        totalScore = 0;
-
+        score = 0;
         shards = PlayerInfo.GetShards();
         highScore = PlayerInfo.GetHighScore();
 
@@ -40,6 +37,7 @@ public class GameManager : MonoBehaviour {
 
         cameraController.SetPlayerController(player);
         
+        StartCoroutine(Fade(1f, 0f));
         GenerateNewLevel();
 
         AudioManager.instance.PlayMusic("ingame");
@@ -51,33 +49,20 @@ public class GameManager : MonoBehaviour {
 
         if (LevelGenerator.levelCompleted) StartCoroutine(HandleTransition());
 
-        if (Input.GetKeyDown(KeyCode.Escape)) HandlePause();
-
         HandleScoreUpdate();
         SetStatusUI();
     }
 
     public void HandleScoreUpdate(){
-        levelScore = (int)(player.transform.position.z/10f);
-    }
-
-    public void HandlePause(){
-
-        if (gamePaused){
-            GetComponent<PauseMenu>().Resume();
-            overlay.gameObject.SetActive(true);
-            AudioManager.instance.ResumeSFX();
-        }else{
-            GetComponent<PauseMenu>().Pause();
-            overlay.gameObject.SetActive(false);
-            AudioManager.instance.PauseSFX();
-        }
+        _score += Time.deltaTime;
+        score = (int) _score;
+        highScore = score > highScore?score:highScore;
     }
 
     public void HandleCapture(string tag){
         if (tag == "Shard")
         {
-            totalScore += 20;
+            score += 10;
             shards++;
             ParticleManager.instance.CaptureShard(player.transform.position);
             AudioManager.instance.PlaySFX("shardcap");
@@ -99,17 +84,17 @@ public class GameManager : MonoBehaviour {
 
     public void EndGame(){
 
-        PlayerInfo.SetHighScore(totalScore + levelScore);
+        PlayerInfo.SetHighScore(highScore);
         PlayerInfo.SetShards(shards);
 
-        gameOver = true;
         overlay.gameObject.SetActive(false);
-        GetComponent<GameOverMenu>().Activate();
+        gameOverUI.SetActive(true);
     }
 
     void SetStatusUI(){
-        ingameScore.text = $"Score\n{totalScore + levelScore}";
-        shardsText.text = $"Shards\n{shards}";
+        ingameScore.text = score.ToString();
+        shardsText.text = shards.ToString();
+        highScoreText.text = highScore.ToString();
     }
 
     IEnumerator Fade(float start, float target){
@@ -128,23 +113,30 @@ public class GameManager : MonoBehaviour {
 
     IEnumerator HandleTransition(){
         yield return Fade(0f, 1f);
-        if(LevelGenerator.levelCompleted) GenerateNewLevel();
+        if(LevelGenerator.levelCompleted){
+            GenerateNewLevel();
+            player.HandleTransition();
+        }
+        yield return new WaitForSeconds(0.3f);
         yield return Fade(1f, 0f);
     }
 
     public int GetScore(){
-        return totalScore + levelScore;
+        return score;
+    }
+
+    public int GetShards(){
+        return shards;
+    }
+
+    public int GetHighScore(){
+        return highScore;
     }
 
     void GenerateNewLevel(){
-        totalScore += levelScore;
-        levelScore = 0;
-
         if (currentLevel){
-            GameObject t = Instantiate(levels[Random.Range(0, levels.Count)], this.transform);
-            player.HandleTransition();
             Destroy(currentLevel);
-            currentLevel = t;
+            currentLevel = Instantiate(levels[Random.Range(0, levels.Count)], this.transform);
         }
         else{
             currentLevel = Instantiate(levels[0], this.transform);
@@ -152,4 +144,5 @@ public class GameManager : MonoBehaviour {
         currentLevel.transform.position = Vector3.zero;
         currentLevel.GetComponent<LevelGenerator>().setPlayerTransform(player.transform);
     }
+
 }

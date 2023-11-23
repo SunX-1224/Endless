@@ -3,39 +3,32 @@ using UnityEngine.SceneManagement;
 using TMPro;
 
 public class PauseMenu : MonoBehaviour{
-
-    [SerializeField] GameObject pauseMenuUI;
+    
+    [SerializeField] GameManager gameManager;
     [SerializeField] TMP_Text scoreText;
     [SerializeField] TMP_Text shardsText;
+    [SerializeField] TMP_Text highScoreText;
 
+    void OnEnable(){
+        scoreText.text = gameManager.GetScore().ToString();
+        shardsText.text = gameManager.GetShards().ToString();
+        highScoreText.text = gameManager.GetHighScore().ToString();
 
-    void Start(){
-        pauseMenuUI.SetActive(false);
-    }
-
-    public void Resume(){
-        pauseMenuUI.SetActive(false);
-        Time.timeScale = 1f;
-        GameManager.gamePaused = false;
-    }
-
-    public void Pause(){
-        int score = GetComponent<GameManager>().GetScore();
-        scoreText.text = $"Score\n{score}";
-        shardsText.text = $"Shards\n{PlayerInfo.GetShards()}";
-        pauseMenuUI.SetActive(true);
+        AudioManager.instance.PauseSFX();
         
         Time.timeScale = 0f;
-        GameManager.gamePaused = true;
     }
 
-    public void LoadMenu(){
+    void OnDisable(){
         Time.timeScale = 1f;
+        AudioManager.instance.ResumeSFX();
+    }
+    
+    public void LoadMenu(){
         SceneManager.LoadScene(0);
     }
 
     public void Restart(){
-        Time.timeScale = 1f;
         SceneManager.LoadScene(1);
     }
 }

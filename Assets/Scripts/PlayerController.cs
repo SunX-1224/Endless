@@ -21,15 +21,16 @@ public class PlayerController: MonoBehaviour{
     Coroutine tiltCoroutine;
     Ship ship;
 
-    public float minVelocity;
+    float minVelocity;
+    float maxVelocity;
 
     void Awake(){
         gameManager = GetComponentInParent<GameManager>();
         ship = GetComponent<Ship>();
         rb = GetComponent<Rigidbody>();
         
-        minVelocity = 18f;
-        rb.velocity = new(0,0,ship.velocity);
+        minVelocity = ship.velocity;
+        maxVelocity = minVelocity * 1.5f;
     }
 
     void Update(){
@@ -44,7 +45,7 @@ public class PlayerController: MonoBehaviour{
 
     public void HandleTransition(){
         transform.position = Vector3.zero;
-        minVelocity += 4f * Time.deltaTime;
+        minVelocity += 2f;
         rb.velocity = new(0f, 0f, minVelocity);
     }
 
@@ -88,7 +89,7 @@ public class PlayerController: MonoBehaviour{
         }
         
         rb.AddForce(force);
-        rb.velocity = new(vx, rb.velocity.y, Mathf.Clamp(rb.velocity.z, minVelocity, 36f)); 
+        rb.velocity = new(vx, rb.velocity.y, Mathf.Clamp(rb.velocity.z, minVelocity, maxVelocity + (boostActive?3f:0f))); 
     }
 
     void PushUp(){
