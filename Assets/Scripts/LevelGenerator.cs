@@ -13,15 +13,14 @@ public class LevelGenerator : MonoBehaviour{
     public const float maxViewDist = 150f;
     public Vector2 playerPosition;
 
-    public static bool levelCompleted;
+    public bool levelCompleted = false;
     
     int endLine;
     int chunksInViewDist;
     Dictionary<Vector2, Chunk> chunksInWorld = new Dictionary<Vector2, Chunk>();
     HashSet<Vector2> lastFrameChunks = new HashSet<Vector2>();
 
-    void Awake(){
-        levelCompleted = false;
+    void Start(){
         chunksInViewDist = Mathf.RoundToInt(maxViewDist / chunkSize);
         endLine = mapSize * chunkSize;
     }

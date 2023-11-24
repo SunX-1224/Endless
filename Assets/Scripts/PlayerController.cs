@@ -53,6 +53,10 @@ public class PlayerController: MonoBehaviour{
         return ship.boost; 
     }
 
+    public float GetSpeed(){
+        return rb.velocity.z;
+    }
+
     public float GetTurnPower(){
         return ship.turnVelocity;
     }

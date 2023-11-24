@@ -4,15 +4,21 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
-    float initialFOV = 70f;
-    float zoomFOV = 85f;
-    [SerializeField] Vector3 offset = new(0f, 0.2f, -0.4f);
+    float initialFOV = 60f;
+    float zoomFOV = 75f;
+    Vector3 offset;
 
     Coroutine fovCoroutine;
     Camera cam;
     PlayerController player = null;
 
+    bool FPPmode;
+
     void Start(){
+        FPPmode = PlayerPrefs.GetInt("fpp", 0)>0;
+        if(FPPmode) offset = new Vector3(0f, 0.152f, 0.397f);
+        else offset = new Vector3(0f, 0.6f, -1.4f);
+
         cam = GetComponent<Camera>();
         cam.fieldOfView = initialFOV;
     }
@@ -22,7 +28,7 @@ public class CameraController : MonoBehaviour
 
         if (player.boostActive) IncreaseFOV(player.GetForce());
         else ResetFOV(3.0f);
-        //TiltCamera(player.targetTilt, player.GetTurnPower());
+        if(FPPmode) TiltCamera(player.targetTilt, player.GetTurnPower());
         transform.position = player.transform.position + offset;
     }
 
@@ -60,7 +66,7 @@ public class CameraController : MonoBehaviour
     }
 
     public void TiltCamera(Vector3 targetTilt, float speed){
-        targetTilt.x = 11f;
+        targetTilt *= 0.3f;
         Quaternion targetRotation = Quaternion.Euler(targetTilt);
         transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * speed);
     }

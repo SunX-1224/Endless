@@ -20,6 +20,7 @@ Player:
 		> Turning effect < DONE >
 		> Movement controls < DONE >
 		> State Controls (alive/dead determination) < DONE >
+		> First Person Mode < DONE >
 		
 	4. Abilities
 		> Booster < DONE >
@@ -47,7 +48,7 @@ Gameplay :
 
 	4. Main menu
 		> Game logo Design
-		> Logo Integration
+		> Logo Integration < DONE >
 		> Menu design < DONE >
 		> Menu programming < DONE >
 		> Settings design < DONE >
@@ -70,7 +71,7 @@ Gameplay :
 		> Environment based gameplay audio 
 
 	7. Project Build
-		> Clear Achievements
+		> Clear Achievements < DONE >
 		> Implement controls for Android/IOS devices
 		> Splash Screen
 		> Build project

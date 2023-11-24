@@ -10,6 +10,7 @@ public class MainMenu : MonoBehaviour{
     [SerializeField] TMP_Text volumeText;
     [SerializeField] TMP_Dropdown qualityDropdown;
     [SerializeField] Slider slider;
+    [SerializeField] Toggle fppToggle;
     [SerializeField] GameObject savingPromptUI;
     [SerializeField] GameObject assetsMenu;
 
@@ -31,6 +32,7 @@ public class MainMenu : MonoBehaviour{
     void Start(){
         slider.value = PlayerPrefs.GetFloat("volume", 1.0f);
         qualityDropdown.value = PlayerPrefs.GetInt("quality", 1);
+        fppToggle.isOn = PlayerPrefs.GetInt("fpp", 0) > 0;
 
         QualitySettings.SetQualityLevel(qualityDropdown.value);
         AudioListener.volume = slider.value;
@@ -70,6 +72,10 @@ public class MainMenu : MonoBehaviour{
     public void SaveQuality(){
         PlayerPrefs.SetInt("quality", QualitySettings.GetQualityLevel());
         StartCoroutine(SavingPrompt());
+    }
+
+    public void FppModeToggle(bool value){
+        PlayerPrefs.SetInt("fpp", value?1:0);
     }
 
     public void ResetAll(){

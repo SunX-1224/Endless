@@ -10,16 +10,15 @@ public class GameManager : MonoBehaviour {
     [SerializeField] TMP_Text ingameScore;
     [SerializeField] TMP_Text shardsText;
     [SerializeField] TMP_Text highScoreText;
-    [SerializeField] GameObject gameOverUI;
 
     [SerializeField] CameraController cameraController;
 
     [SerializeField] List<GameObject> playerPrefabs;
     [SerializeField] List<GameObject> levels;
 
-    public static bool gameOver;
-
-    GameObject currentLevel;
+    PauseMenu pauseMenuController;
+    GameOverMenu goMenuController;
+    LevelGenerator currentLevel;
     PlayerController player;
 
     int score;
@@ -28,6 +27,9 @@ public class GameManager : MonoBehaviour {
     int highScore;
 
     void Start(){
+        pauseMenuController = GetComponent<PauseMenu>();
+        goMenuController = GetComponent<GameOverMenu>();
+
         score = 0;
         shards = PlayerInfo.GetShards();
         highScore = PlayerInfo.GetHighScore();
@@ -37,7 +39,6 @@ public class GameManager : MonoBehaviour {
 
         cameraController.SetPlayerController(player);
         
-        StartCoroutine(Fade(1f, 0f));
         GenerateNewLevel();
 
         AudioManager.instance.PlayMusic("ingame");
@@ -47,16 +48,20 @@ public class GameManager : MonoBehaviour {
     void Update(){
         if(!player.isAlive) return;
 
-        if (LevelGenerator.levelCompleted) StartCoroutine(HandleTransition());
+        if (currentLevel.levelCompleted) StartCoroutine(HandleTransition());
 
         HandleScoreUpdate();
         SetStatusUI();
     }
 
     public void HandleScoreUpdate(){
-        _score += Time.deltaTime;
+        _score += Time.deltaTime * player.GetSpeed() / 10f;
         score = (int) _score;
         highScore = score > highScore?score:highScore;
+    }
+
+    public void HandlePause(){
+        pauseMenuController.Pause(score, highScore, shards);
     }
 
     public void HandleCapture(string tag){
@@ -88,7 +93,7 @@ public class GameManager : MonoBehaviour {
         PlayerInfo.SetShards(shards);
 
         overlay.gameObject.SetActive(false);
-        gameOverUI.SetActive(true);
+        goMenuController.Activate(score, highScore, shards);
     }
 
     void SetStatusUI(){
@@ -113,7 +118,7 @@ public class GameManager : MonoBehaviour {
 
     IEnumerator HandleTransition(){
         yield return Fade(0f, 1f);
-        if(LevelGenerator.levelCompleted){
+        if(currentLevel.levelCompleted){
             GenerateNewLevel();
             player.HandleTransition();
         }
@@ -121,28 +126,16 @@ public class GameManager : MonoBehaviour {
         yield return Fade(1f, 0f);
     }
 
-    public int GetScore(){
-        return score;
-    }
-
-    public int GetShards(){
-        return shards;
-    }
-
-    public int GetHighScore(){
-        return highScore;
-    }
-
     void GenerateNewLevel(){
         if (currentLevel){
-            Destroy(currentLevel);
-            currentLevel = Instantiate(levels[Random.Range(0, levels.Count)], this.transform);
+            Destroy(currentLevel.gameObject);
+            currentLevel = Instantiate(levels[Random.Range(0, levels.Count)], this.transform).GetComponent<LevelGenerator>();
         }
         else{
-            currentLevel = Instantiate(levels[0], this.transform);
+            currentLevel = Instantiate(levels[0], this.transform).GetComponent<LevelGenerator>();
         }
         currentLevel.transform.position = Vector3.zero;
-        currentLevel.GetComponent<LevelGenerator>().setPlayerTransform(player.transform);
+        currentLevel.setPlayerTransform(player.transform);
     }
 
 }

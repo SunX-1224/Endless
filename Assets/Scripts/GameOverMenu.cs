@@ -5,15 +5,16 @@ using UnityEngine.SceneManagement;
 
 public class GameOverMenu : MonoBehaviour{
     
-    [SerializeField] GameManager gameManager;
+    [SerializeField] GameObject gameOverMenuUI;
     [SerializeField] TMP_Text scoreText;
     [SerializeField] TMP_Text highScoreText;
     [SerializeField] TMP_Text shardsText;
 
-    void OnEnable(){
-        scoreText.text = gameManager.GetScore().ToString();
-        highScoreText.text = gameManager.GetHighScore().ToString();
-        shardsText.text = gameManager.GetShards().ToString(); 
+    public void Activate(int score, int highScore, int shards){
+        gameOverMenuUI.SetActive(true);
+        scoreText.text = score.ToString();
+        highScoreText.text = highScore.ToString();
+        shardsText.text = shards.ToString(); 
     }
     public void LoadMenu(){
         SceneManager.LoadScene(0);
