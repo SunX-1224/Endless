@@ -1,36 +1,48 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using TMPro;
+
+[System.Serializable]
+public struct MeshData{
+    public Mesh mesh;
+    public MeshRenderer meshRenderer;
+};
 
 public class PlayerController: MonoBehaviour{
 
-    GameManager gameManager;
-    
-    public bool isAlive = true;
-    public int jumps;
-    public int shields;
+    [HideInInspector] public bool isAlive = true;
+    [HideInInspector] public int jumps;
+    [HideInInspector] public int shields;
+    [HideInInspector] public bool boostActive;
+    [HideInInspector] public Vector3 targetTilt;
+    [HideInInspector] public Vector3 velocity;
+    [HideInInspector] public float turnVelocity;
 
-    public bool boostActive;
+    [SerializeField] float minVelocity;
+    [SerializeField] float maxVelocity;
+    [SerializeField] float boost;
+    [SerializeField] float turnPower;
+    [SerializeField] float jumpPower;
+    [SerializeField] GameManager gameManager;
+    [SerializeField] Button jumpBtn;
+    [SerializeField] TMP_Text jumpsCountUI;
+    [SerializeField] TMP_Text shieldsCountUI;
+    [SerializeField] List<MeshData> shipMeshes;
 
-    public Vector3 targetTilt;
-    
     Vector3 maxTilt = new Vector3(20,0, 50);
     Rigidbody rb;
-    Coroutine tiltCoroutine;
-    Ship ship;
-
-    float minVelocity;
-    float maxVelocity;
 
     void Awake(){
-        gameManager = GetComponentInParent<GameManager>();
-        ship = GetComponent<Ship>();
-        rb = GetComponent<Rigidbody>();
+        int shipIndex = PlayerInfo.GetShipIndex();
         
-        minVelocity = ship.velocity;
-        maxVelocity = minVelocity * 1.5f;
+        MeshRenderer mr = GetComponent<MeshRenderer>();
+        mr.sharedMaterials = shipMeshes[shipIndex].meshRenderer.sharedMaterials;
+        GetComponent<MeshFilter>().mesh = shipMeshes[shipIndex].mesh;
+
+        rb = GetComponent<Rigidbody>();
+        PickUpsUIUpdate();
     }
 
     void Update(){
@@ -49,18 +61,6 @@ public class PlayerController: MonoBehaviour{
         rb.velocity = new(0f, 0f, minVelocity);
     }
 
-    public float GetForce(){
-        return ship.boost; 
-    }
-
-    public float GetSpeed(){
-        return rb.velocity.z;
-    }
-
-    public float GetTurnPower(){
-        return ship.turnVelocity;
-    }
-
     void HandleControls(){
 
         Vector3 force = new(0, 0, 0);
@@ -70,10 +70,10 @@ public class PlayerController: MonoBehaviour{
 
         float h = Input.GetAxis("Horizontal");
         float v = Input.GetAxis("Vertical");
-        
-        force.z = ship.boost * v;
+
+        force.z = boost * v;
         targetTilt.x = Mathf.Min(maxTilt.x * v, 0f);
-        vx = ship.turnVelocity * h;
+        vx = turnPower * h;
         targetTilt.z = -maxTilt.z * h;
 
         boostActive = force.z > 0f;
@@ -85,20 +85,33 @@ public class PlayerController: MonoBehaviour{
         }
 
         if (Input.GetKey(KeyCode.Space)){
-            if (!rb.useGravity && jumps > 0){
-                jumps--;
-                PushUp();
-                ParticleManager.instance.JumpEffect(transform);
-            }
+            HandleJump();
         }
         
         rb.AddForce(force);
         rb.velocity = new(vx, rb.velocity.y, Mathf.Clamp(rb.velocity.z, minVelocity, maxVelocity + (boostActive?3f:0f))); 
+
+        velocity =rb.velocity;    
+    }
+
+    public void HandleJump(){
+        if (!rb.useGravity && jumps > 0){
+            jumps--;
+            PickUpsUIUpdate();
+            PushUp();
+            ParticleManager.instance.JumpEffect(transform);
+        }
+    }
+
+    void PickUpsUIUpdate(){
+        jumpBtn.interactable = jumps > 0;
+        jumpsCountUI.text = jumps.ToString();
+        shieldsCountUI.text = shields.ToString();
     }
 
     void PushUp(){
         rb.constraints = RigidbodyConstraints.None;
-        rb.AddForce(0, ship.jumpForce, 0);
+        rb.AddForce(0, jumpPower, 0);
         AudioManager.instance.PlaySFX("jump");
         rb.useGravity = true;
     }
@@ -106,7 +119,7 @@ public class PlayerController: MonoBehaviour{
     void TiltPlayer(){
             
         Quaternion targetRotation = Quaternion.Euler(targetTilt);
-        transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, ship.turnVelocity);            
+        transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, turnPower);            
     }
 
 
@@ -117,6 +130,7 @@ public class PlayerController: MonoBehaviour{
             if(isAlive){
                 if(shields > 0){
                     shields--;
+                    PickUpsUIUpdate();
                     PushUp();
                     AudioManager.instance.PlaySFX("shield");
                     ParticleManager.instance.JumpEffect(transform);
@@ -130,8 +144,29 @@ public class PlayerController: MonoBehaviour{
                 }
             }
         }else{
-            gameManager.HandleCapture(collider.tag);
+            HandleCapture(collider.tag);
             Destroy(collider.gameObject);
+        }
+    }
+    
+    public void HandleCapture(string tag){
+        if (tag == "Shard"){
+            gameManager.AddScore(10);
+            gameManager.AddShards(1);
+            ParticleManager.instance.CaptureShard(transform.position);
+            AudioManager.instance.PlaySFX("shardcap");
+        }
+        else if (tag == "Jump"){
+            jumps++;
+            PickUpsUIUpdate();
+            ParticleManager.instance.CaptureItem(transform.position);
+            AudioManager.instance.PlaySFX("capture");
+        }
+        else if (tag == "Shield"){
+            shields++;
+            PickUpsUIUpdate();
+            ParticleManager.instance.CaptureItem(transform.position);
+            AudioManager.instance.PlaySFX("capture");
         }
     }
 }

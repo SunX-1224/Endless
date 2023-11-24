@@ -5,18 +5,10 @@ using TMPro;
 public class PauseMenu : MonoBehaviour{
     
     [SerializeField] GameObject pauseMenuUI;
-    [SerializeField] TMP_Text scoreText;
-    [SerializeField] TMP_Text shardsText;
-    [SerializeField] TMP_Text highScoreText;
 
-    public void Pause(int score, int highScore, int shards){
+    public void Pause(){
         pauseMenuUI.SetActive(true);
-        scoreText.text = score.ToString();
-        shardsText.text = highScore.ToString();
-        highScoreText.text = shards.ToString();
-
         AudioManager.instance.PauseSFX();
-        
         Time.timeScale = 0f;
     }
 
@@ -29,10 +21,12 @@ public class PauseMenu : MonoBehaviour{
     public void LoadMenu(){
         Time.timeScale = 1f;
         SceneManager.LoadScene(0);
+        AudioManager.instance.StopSFX();
     }
 
     public void Restart(){
         Time.timeScale = 1f;
+        AudioManager.instance.StopSFX();
         SceneManager.LoadScene(1);
     }
 }

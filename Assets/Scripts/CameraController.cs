@@ -2,21 +2,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CameraController : MonoBehaviour
-{
+public class CameraController : MonoBehaviour{
+
+    [SerializeField] PlayerController player;
+    
     float initialFOV = 60f;
     float zoomFOV = 75f;
     Vector3 offset;
 
     Coroutine fovCoroutine;
     Camera cam;
-    PlayerController player = null;
-
-    bool FPPmode;
+    bool fppMode;
 
     void Start(){
-        FPPmode = PlayerPrefs.GetInt("fpp", 0)>0;
-        if(FPPmode) offset = new Vector3(0f, 0.152f, 0.397f);
+        fppMode= PlayerPrefs.GetInt("fpp", 0)>0;
+        if(fppMode) offset = new Vector3(0f, 0.152f, 0.397f);
         else offset = new Vector3(0f, 0.6f, -1.4f);
 
         cam = GetComponent<Camera>();
@@ -24,16 +24,11 @@ public class CameraController : MonoBehaviour
     }
 
     void Update(){
-        if (!player) return;
 
-        if (player.boostActive) IncreaseFOV(player.GetForce());
-        else ResetFOV(3.0f);
-        if(FPPmode) TiltCamera(player.targetTilt, player.GetTurnPower());
+        if (player.boostActive) IncreaseFOV(player.velocity.z);
+        else ResetFOV(5f);
+        if(fppMode) TiltCamera(player.targetTilt, player.velocity.x);
         transform.position = player.transform.position + offset;
-    }
-
-    public void SetPlayerController(PlayerController _player){
-        player = _player;
     }
 
     void IncreaseFOV(float speed){
@@ -67,6 +62,7 @@ public class CameraController : MonoBehaviour
 
     public void TiltCamera(Vector3 targetTilt, float speed){
         targetTilt *= 0.3f;
+        if(!fppMode) targetTilt.x = 9.54f;
         Quaternion targetRotation = Quaternion.Euler(targetTilt);
         transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * speed);
     }

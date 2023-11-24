@@ -11,15 +11,13 @@ public class GameManager : MonoBehaviour {
     [SerializeField] TMP_Text shardsText;
     [SerializeField] TMP_Text highScoreText;
 
-    [SerializeField] CameraController cameraController;
+    [SerializeField] PlayerController player;
 
-    [SerializeField] List<GameObject> playerPrefabs;
     [SerializeField] List<GameObject> levels;
 
     PauseMenu pauseMenuController;
     GameOverMenu goMenuController;
     LevelGenerator currentLevel;
-    PlayerController player;
 
     int score;
     float _score;
@@ -34,11 +32,7 @@ public class GameManager : MonoBehaviour {
         shards = PlayerInfo.GetShards();
         highScore = PlayerInfo.GetHighScore();
 
-        GameObject _p = Instantiate(playerPrefabs[PlayerInfo.GetShipIndex()], transform);
-        player = _p.GetComponent<PlayerController>();
-
-        cameraController.SetPlayerController(player);
-        
+        StartCoroutine(Fade(1f, 0f));
         GenerateNewLevel();
 
         AudioManager.instance.PlayMusic("ingame");
@@ -55,45 +49,30 @@ public class GameManager : MonoBehaviour {
     }
 
     public void HandleScoreUpdate(){
-        _score += Time.deltaTime * player.GetSpeed() / 10f;
+        _score += Time.deltaTime * player.velocity.z / 10f;
         score = (int) _score;
         highScore = score > highScore?score:highScore;
     }
 
     public void HandlePause(){
-        pauseMenuController.Pause(score, highScore, shards);
+        pauseMenuController.Pause();
     }
 
-    public void HandleCapture(string tag){
-        if (tag == "Shard")
-        {
-            score += 10;
-            shards++;
-            ParticleManager.instance.CaptureShard(player.transform.position);
-            AudioManager.instance.PlaySFX("shardcap");
-        }
-        else if (tag == "Jump")
-        {
-            player.jumps++;
-            ParticleManager.instance.CaptureItem(player.transform.position);
-            AudioManager.instance.PlaySFX("capture");
-        }
-        else if (tag == "Shield")
-        {
-            player.shields++;
-            ParticleManager.instance.CaptureItem(player.transform.position);
-            AudioManager.instance.PlaySFX("capture");
-        }
-
+    public void AddScore(int x){
+        score += x;
     }
 
+    public void AddShards(int x){
+        shards += x;
+    }
+    
     public void EndGame(){
 
         PlayerInfo.SetHighScore(highScore);
         PlayerInfo.SetShards(shards);
 
         overlay.gameObject.SetActive(false);
-        goMenuController.Activate(score, highScore, shards);
+        goMenuController.Activate();
     }
 
     void SetStatusUI(){

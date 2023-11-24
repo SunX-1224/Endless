@@ -26,6 +26,8 @@ Player:
 		> Booster < DONE >
 		> Jump < DONE >
 		> Shield < DONE >
+	
+	5. Player Skin change instead of prefabs
 
 Gameplay :
 	1. Endless environment generation
