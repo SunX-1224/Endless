@@ -27,13 +27,12 @@ public class CameraController : MonoBehaviour{
 
         if (player.boostActive) IncreaseFOV(player.velocity.z);
         else ResetFOV(5f);
-        if(fppMode) TiltCamera(player.targetTilt, player.velocity.x);
+        TiltCamera(player.targetTilt);
         transform.position = player.transform.position + offset;
     }
 
     void IncreaseFOV(float speed){
-        if (fovCoroutine != null)
-        {
+        if (fovCoroutine != null) {
             StopCoroutine(fovCoroutine);
         }
         fovCoroutine = StartCoroutine(ChangeFOV(zoomFOV, speed));
@@ -60,10 +59,10 @@ public class CameraController : MonoBehaviour{
         cam.fieldOfView = targetFOV;
     }
 
-    public void TiltCamera(Vector3 targetTilt, float speed){
+    public void TiltCamera(Vector3 targetTilt){
         targetTilt *= 0.3f;
         if(!fppMode) targetTilt.x = 9.54f;
         Quaternion targetRotation = Quaternion.Euler(targetTilt);
-        transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * speed);
+        transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, 3f * Time.deltaTime);
     }
 }

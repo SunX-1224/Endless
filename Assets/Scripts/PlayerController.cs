@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using TMPro;
 
@@ -20,18 +21,23 @@ public class PlayerController: MonoBehaviour{
     [HideInInspector] public Vector3 velocity;
     [HideInInspector] public float turnVelocity;
 
-    [SerializeField] float minVelocity;
-    [SerializeField] float maxVelocity;
-    [SerializeField] float boost;
-    [SerializeField] float turnPower;
-    [SerializeField] float jumpPower;
+    public float minVelocity;
+    public float maxVelocity;
+    public float boost;
+    public float turnPower;
+    public float jumpPower;
+
     [SerializeField] GameManager gameManager;
     [SerializeField] Button jumpBtn;
     [SerializeField] TMP_Text jumpsCountUI;
     [SerializeField] TMP_Text shieldsCountUI;
     [SerializeField] List<MeshData> shipMeshes;
 
+
+    [SerializeField] Camera cam;
+
     Vector3 maxTilt = new Vector3(20,0, 50);
+    int vertInput = 0;
     Rigidbody rb;
 
     void Awake(){
@@ -64,21 +70,19 @@ public class PlayerController: MonoBehaviour{
     void HandleControls(){
 
         Vector3 force = new(0, 0, 0);
-        float vx = rb.velocity.x;
 
         targetTilt.y = 0;
-
-        float h = Input.GetAxis("Horizontal");
-        float v = Input.GetAxis("Vertical");
+        
+        float v = (float) vertInput;
+        HandleTouch(out float h);
 
         force.z = boost * v;
         targetTilt.x = Mathf.Min(maxTilt.x * v, 0f);
-        vx = turnPower * h;
         targetTilt.z = -maxTilt.z * h;
 
         boostActive = force.z > 0f;
 
-        if (rb.useGravity && transform.position.y < 0f){
+        if (rb.useGravity && transform.position.y < -0.2f){
             rb.useGravity = false;
             transform.position = new Vector3(transform.position.x, 0, transform.position.z);
             rb.constraints = RigidbodyConstraints.FreezePositionY;
@@ -89,16 +93,33 @@ public class PlayerController: MonoBehaviour{
         }
         
         rb.AddForce(force);
-        rb.velocity = new(vx, rb.velocity.y, Mathf.Clamp(rb.velocity.z, minVelocity, maxVelocity + (boostActive?3f:0f))); 
+        rb.velocity = new(rb.velocity.z * h, rb.velocity.y, Mathf.Clamp(rb.velocity.z, minVelocity, maxVelocity * (boostActive?1.1f:1f))); 
 
-        velocity =rb.velocity;    
+        velocity =rb.velocity;
+    }
+
+    public void VerticalInput(int dir){
+        vertInput = dir;
+    }
+
+    public void ResetVerticalInput(){
+        vertInput = 0;
+    }
+
+    void HandleTouch(out float h){
+        h = 0f;
+        foreach (Touch touch in Input.touches){
+            if(EventSystem.current.IsPointerOverGameObject(touch.fingerId)) continue;
+            float x = (touch.position.x / Screen.width - 0.5f)*1.8f;
+            h = Mathf.Abs(x) > Mathf.Abs(h)?x:h;
+        }
     }
 
     public void HandleJump(){
         if (!rb.useGravity && jumps > 0){
+            PushUp();
             jumps--;
             PickUpsUIUpdate();
-            PushUp();
             ParticleManager.instance.JumpEffect(transform);
         }
     }
@@ -112,14 +133,13 @@ public class PlayerController: MonoBehaviour{
     void PushUp(){
         rb.constraints = RigidbodyConstraints.None;
         rb.AddForce(0, jumpPower, 0);
-        AudioManager.instance.PlaySFX("jump");
         rb.useGravity = true;
+        AudioManager.instance.PlaySFX("jump");
     }
 
     void TiltPlayer(){
-            
         Quaternion targetRotation = Quaternion.Euler(targetTilt);
-        transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, turnPower);            
+        transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, 3f * Time.deltaTime);
     }
 
 

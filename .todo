@@ -27,7 +27,7 @@ Player:
 		> Jump < DONE >
 		> Shield < DONE >
 	
-	5. Player Skin change instead of prefabs
+	5. Player Skin change instead of prefabs < DONE >
 
 Gameplay :
 	1. Endless environment generation
@@ -85,6 +85,7 @@ Gameplay :
 	10. Optimization
 		> Level Transition Coroutine < DONE >
 		> Better Main Menu with stored preferences < DONE >
+		> UI masked touch input
 
 	9. Bugs Fix
 	
