@@ -74,8 +74,8 @@ Gameplay :
 
 	7. Project Build
 		> Clear Achievements < DONE >
-		> Implement controls for Android/IOS devices
-		> Splash Screen
+		> Implement controls for Android/IOS devices < DONE >
+		> Splash Screen < DONE >
 		> Build project
 	
 	8. Deploy project
@@ -85,7 +85,7 @@ Gameplay :
 	10. Optimization
 		> Level Transition Coroutine < DONE >
 		> Better Main Menu with stored preferences < DONE >
-		> UI masked touch input
+		> UI masked touch input < DONE >
 
 	9. Bugs Fix
 	
