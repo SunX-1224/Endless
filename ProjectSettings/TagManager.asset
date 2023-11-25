@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Obstacle
   - Shard
+  - button
   layers:
   - Default
   - TransparentFX

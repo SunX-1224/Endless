@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class AudioManager: MonoBehaviour {
     public AudioSource musicSource, sfxSource;
@@ -15,6 +16,18 @@ public class AudioManager: MonoBehaviour {
         else{
             Destroy(gameObject);
             return;
+        }
+    }
+
+    void Update(){
+        foreach (Touch touch in Input.touches){
+            if(EventSystem.current.IsPointerOverGameObject(touch.fingerId)){
+                GameObject o = EventSystem.current.currentSelectedGameObject;
+                if(o != null && o.tag == "button"){
+                    PlaySFX("click");
+                    break;
+                }
+            }
         }
     }
 

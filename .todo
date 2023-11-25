@@ -63,13 +63,13 @@ Gameplay :
 		> Pause menu programming < DONE >
 		> Game over screen Design < DONE >
 		> Game over screen Programming < DONE >
-		> PLayer Data storage < DONE >
+		> Player Data storage < DONE >
 
 	6. Audio Programming
 		> In-Game music < DONE >
 		> *Abilities* capture audio < DONE >
 		> Shards capture audio < DONE >
-		> UI events audio (clicks and transitions)
+		> UI events audio (clicks and transitions) < DONE >
 		> Environment based gameplay audio 
 
 	7. Project Build

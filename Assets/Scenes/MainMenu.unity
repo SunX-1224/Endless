@@ -776,7 +776,7 @@ GameObject:
   - component: {fileID: 89885836}
   m_Layer: 5
   m_Name: Reset
-  m_TagString: Untagged
+  m_TagString: button
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1126,7 +1126,7 @@ GameObject:
   - component: {fileID: 216921371}
   m_Layer: 5
   m_Name: Settings
-  m_TagString: Untagged
+  m_TagString: button
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1329,7 +1329,7 @@ GameObject:
   - component: {fileID: 290474445}
   m_Layer: 5
   m_Name: End
-  m_TagString: Untagged
+  m_TagString: button
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1462,7 +1462,7 @@ GameObject:
   - component: {fileID: 293241732}
   m_Layer: 5
   m_Name: Play
-  m_TagString: Untagged
+  m_TagString: button
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1868,7 +1868,7 @@ GameObject:
   - component: {fileID: 415579115}
   m_Layer: 5
   m_Name: Accept
-  m_TagString: Untagged
+  m_TagString: button
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2071,7 +2071,7 @@ GameObject:
   - component: {fileID: 431132638}
   m_Layer: 5
   m_Name: No
-  m_TagString: Untagged
+  m_TagString: button
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2274,7 +2274,7 @@ GameObject:
   - component: {fileID: 445725891}
   m_Layer: 5
   m_Name: Back
-  m_TagString: Untagged
+  m_TagString: button
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2477,7 +2477,7 @@ GameObject:
   - component: {fileID: 458837549}
   m_Layer: 5
   m_Name: Camera
-  m_TagString: Untagged
+  m_TagString: button
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2892,7 +2892,7 @@ GameObject:
   - component: {fileID: 495962725}
   m_Layer: 5
   m_Name: Axe
-  m_TagString: Untagged
+  m_TagString: button
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3176,7 +3176,7 @@ GameObject:
   - component: {fileID: 603327483}
   m_Layer: 5
   m_Name: Save
-  m_TagString: Untagged
+  m_TagString: button
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3391,7 +3391,7 @@ GameObject:
   - component: {fileID: 613683145}
   m_Layer: 5
   m_Name: No
-  m_TagString: Untagged
+  m_TagString: button
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3658,7 +3658,7 @@ PrefabInstance:
       objectReference: {fileID: 13317429}
     - target: {fileID: 3940502191130893333, guid: 2b4ebd9c3a962ad3b96394451872fed0, type: 3}
       propertyPath: sfxs.Array.size
-      value: 6
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 3940502191130893333, guid: 2b4ebd9c3a962ad3b96394451872fed0, type: 3}
       propertyPath: musics.Array.size
@@ -3675,7 +3675,7 @@ PrefabInstance:
     - target: {fileID: 3940502191130893333, guid: 2b4ebd9c3a962ad3b96394451872fed0, type: 3}
       propertyPath: sfxs.Array.data[1].clip
       value: 
-      objectReference: {fileID: 8300000, guid: a3799281f4cac73d4b1335881eff60df, type: 3}
+      objectReference: {fileID: 8300000, guid: 9b63bfc4ad545ae33866ea9a53f144a4, type: 3}
     - target: {fileID: 3940502191130893333, guid: 2b4ebd9c3a962ad3b96394451872fed0, type: 3}
       propertyPath: sfxs.Array.data[1].name
       value: death
@@ -3707,10 +3707,18 @@ PrefabInstance:
     - target: {fileID: 3940502191130893333, guid: 2b4ebd9c3a962ad3b96394451872fed0, type: 3}
       propertyPath: sfxs.Array.data[5].clip
       value: 
-      objectReference: {fileID: 8300000, guid: eb0cdfd28271d8fa8986a0264518aec9, type: 3}
+      objectReference: {fileID: 8300000, guid: f854e0fe23dcc046f9e3f2b94f6b5a3a, type: 3}
     - target: {fileID: 3940502191130893333, guid: 2b4ebd9c3a962ad3b96394451872fed0, type: 3}
       propertyPath: sfxs.Array.data[5].name
       value: shield
+      objectReference: {fileID: 0}
+    - target: {fileID: 3940502191130893333, guid: 2b4ebd9c3a962ad3b96394451872fed0, type: 3}
+      propertyPath: sfxs.Array.data[6].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: 23dba1e3e928d7c388e924ed2a18ed05, type: 3}
+    - target: {fileID: 3940502191130893333, guid: 2b4ebd9c3a962ad3b96394451872fed0, type: 3}
+      propertyPath: sfxs.Array.data[6].name
+      value: click
       objectReference: {fileID: 0}
     - target: {fileID: 3940502191130893333, guid: 2b4ebd9c3a962ad3b96394451872fed0, type: 3}
       propertyPath: musics.Array.data[0].clip
@@ -3751,7 +3759,7 @@ GameObject:
   - component: {fileID: 636357210}
   m_Layer: 5
   m_Name: Back
-  m_TagString: Untagged
+  m_TagString: button
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4720,7 +4728,7 @@ GameObject:
   - component: {fileID: 993704650}
   m_Layer: 5
   m_Name: Yes
-  m_TagString: Untagged
+  m_TagString: button
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5096,7 +5104,7 @@ GameObject:
   - component: {fileID: 1011334475}
   m_Layer: 5
   m_Name: Quit
-  m_TagString: Untagged
+  m_TagString: button
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5299,7 +5307,7 @@ GameObject:
   - component: {fileID: 1022658531}
   m_Layer: 5
   m_Name: Yes
-  m_TagString: Untagged
+  m_TagString: button
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5514,7 +5522,7 @@ GameObject:
   - component: {fileID: 1023390085}
   m_Layer: 5
   m_Name: Hammer
-  m_TagString: Untagged
+  m_TagString: button
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5865,7 +5873,7 @@ GameObject:
   - component: {fileID: 1125357391}
   m_Layer: 5
   m_Name: Yes
-  m_TagString: Untagged
+  m_TagString: button
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6918,7 +6926,7 @@ GameObject:
   - component: {fileID: 1330115561}
   m_Layer: 5
   m_Name: Background
-  m_TagString: Untagged
+  m_TagString: button
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6995,7 +7003,7 @@ GameObject:
   - component: {fileID: 1362490637}
   m_Layer: 5
   m_Name: No
-  m_TagString: Untagged
+  m_TagString: button
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -7198,7 +7206,7 @@ GameObject:
   - component: {fileID: 1385454564}
   m_Layer: 5
   m_Name: Graphics
-  m_TagString: Untagged
+  m_TagString: button
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -7539,7 +7547,7 @@ GameObject:
   - component: {fileID: 1403689729}
   m_Layer: 5
   m_Name: Sound
-  m_TagString: Untagged
+  m_TagString: button
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -7817,7 +7825,7 @@ GameObject:
   - component: {fileID: 1416365603}
   m_Layer: 5
   m_Name: Save
-  m_TagString: Untagged
+  m_TagString: button
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -8037,7 +8045,7 @@ GameObject:
   - component: {fileID: 1445362701}
   m_Layer: 5
   m_Name: Back
-  m_TagString: Untagged
+  m_TagString: button
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -8058,7 +8066,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 110.59973, y: 17.99997}
+  m_AnchoredPosition: {x: 110.59973, y: 17.999939}
   m_SizeDelta: {x: 400, y: 100}
   m_Pivot: {x: 0, y: 0}
 --- !u!114 &1445362701
@@ -8275,7 +8283,7 @@ GameObject:
   - component: {fileID: 1508764555}
   m_Layer: 5
   m_Name: QualityDropDown
-  m_TagString: Untagged
+  m_TagString: button
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -8855,7 +8863,7 @@ GameObject:
   - component: {fileID: 1680213111}
   m_Layer: 5
   m_Name: Back
-  m_TagString: Untagged
+  m_TagString: button
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -9169,7 +9177,7 @@ GameObject:
   - component: {fileID: 1708036079}
   m_Layer: 5
   m_Name: Back
-  m_TagString: Untagged
+  m_TagString: button
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -10310,7 +10318,7 @@ GameObject:
   - component: {fileID: 2081243300}
   m_Layer: 5
   m_Name: Assets
-  m_TagString: Untagged
+  m_TagString: button
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
