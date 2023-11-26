@@ -1,92 +1,29 @@
 # Endless works to do ;)
 
 # TODO
-Environment : 
-	1. Obstacles design planning  < DONE >
-	2. Obstacles modelling < DONE >
-	3. Obstacles integration on game world < DONE >
-	4. Different environments aesthetics planning
+BUGS : (HIGH PRIORITY)
 
-Player:
-	1. Designs
-		> Design multiple player (spaceship) models < DONE >
-		> Model integration in game < DONE >
-		> Materials and Textures for character < DONE >
-		> Constant particles emission < DONE >
-		> Event based particles emission < DONE >
-
-	3. Controls
-		> Dynamic FOV < DONE >
-		> Turning effect < DONE >
-		> Movement controls < DONE >
-		> State Controls (alive/dead determination) < DONE >
-		> First Person Mode < DONE >
-		
-	4. Abilities
-		> Booster < DONE >
-		> Jump < DONE >
-		> Shield < DONE >
+Environment : (UPDATE) 
+	> Old Environment changes
+		> Remove Materials and Add Textures
 	
-	5. Player Skin change instead of prefabs < DONE >
+	> New Environment Design
+		> Obstacles design planning
+		> Obstacles modelling
+		> Textures Integration
+		> Obstacles integration on game world
+		> Different environments aesthetics planning
 
-Gameplay :
-	1. Endless environment generation
-		> Chunk-wise Level Generation < DONE >
-		> Obstacles generation < DONE >
-		> Collapsing Level Generation Logic
-		> Redundant Chunk Destroying Logic < DONE >
-		> Fog effect < DONE >
-		> Level Ending and Transition < DONE >
-		> Better Lightings < DONE >
-		> Day night cycle programming < DISCARDED >
-
-	2. Scoring methods
-		> Score Method Implementation (Shards) < DONE >
-		> Shards design < DONE >
-
-	3. In-play Powerups
-		> *Abilities* design < DONE >
-		> *Abilities* capture < DONE >
-
-	4. Main menu
-		> Game logo Design < DONE >
-		> Logo Integration < DONE >
-		> Menu design < DONE >
-		> Menu programming < DONE >
-		> Settings design < DONE >
-		> Settings programming < DONE >
-		> In-game store design < DONE >
-		> In-game store programming < DONE >
-
-	5. Game state controls
-		> Pause menu design < DONE >
-		> Pause menu programming < DONE >
-		> Game over screen Design < DONE >
-		> Game over screen Programming < DONE >
-		> Player Data storage < DONE >
-
-	6. Audio Programming
-		> In-Game music < DONE >
-		> *Abilities* capture audio < DONE >
-		> Shards capture audio < DONE >
-		> UI events audio (clicks and transitions) < DONE >
+Gameplay : (UPDATE)
+	> Audio Programming
 		> Environment based gameplay audio 
 
-	7. Project Build
-		> Clear Achievements < DONE >
-		> Implement controls for Android/IOS devices < DONE >
-		> Splash Screen < DONE >
+	> Project Build
 		> Build project
+		> Test Project
 	
-	8. Deploy project
+	> Deploy project
 		> Google playstore Account 
 		> Deploy game on store
-	
-	10. Optimization
-		> Level Transition Coroutine < DONE >
-		> Better Main Menu with stored preferences < DONE >
-		> UI masked touch input < DONE >
-
-	9. Bugs Fix
 	
 

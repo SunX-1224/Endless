@@ -5,16 +5,15 @@ using UnityEngine;
 
 public class LevelGenerator : MonoBehaviour{
 
-    Transform player;
     public List<GameObject> chunkTypes;
 
-    public const int mapSize = 20;
-    public const int chunkSize = 20;
-    public const float maxViewDist = 150f;
-    public Vector2 playerPosition;
+    [SerializeField] int mapSize = 80;
+    [SerializeField] int chunkSize = 20;
+    [SerializeField] float maxViewDist = 150f;
 
-    public bool levelCompleted = false;
+    [HideInInspector] public bool levelCompleted = false;
     
+    Transform player;
     int endLine;
     int chunksInViewDist;
     Dictionary<Vector2, Chunk> chunksInWorld = new Dictionary<Vector2, Chunk>();
@@ -26,14 +25,13 @@ public class LevelGenerator : MonoBehaviour{
     }
 
     void Update(){
-        playerPosition = new Vector2(player.position.x, player.position.z);
         UpdateVisibleChunks();
-        levelCompleted = playerPosition.y >= endLine;
+        levelCompleted = player.position.z >= endLine;
     }
 
     void UpdateVisibleChunks(){
-        int curChunkCoordX = Mathf.RoundToInt(playerPosition.x / chunkSize);
-        int curChunkCoordY = Mathf.RoundToInt(playerPosition.y / chunkSize);
+        int curChunkCoordX = Mathf.RoundToInt(player.position.x / chunkSize);
+        int curChunkCoordY = Mathf.RoundToInt(player.position.z / chunkSize);
 
         foreach (Vector2 chunkCoord in lastFrameChunks){
             if(chunkCoord.y < (curChunkCoordY-2) ){

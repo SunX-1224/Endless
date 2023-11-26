@@ -30,7 +30,7 @@ public class CameraController : MonoBehaviour{
     }
 
     public void TiltCamera(Vector3 targetTilt){
-        targetTilt *= 0.3f;
+        targetTilt *= 0.2f;
         if(!fppMode) targetTilt.x = 9.54f;
         Quaternion targetRotation = Quaternion.Euler(targetTilt);
         transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, 3f * Time.deltaTime);
