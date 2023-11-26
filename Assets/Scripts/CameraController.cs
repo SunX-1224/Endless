@@ -6,11 +6,10 @@ public class CameraController : MonoBehaviour{
 
     [SerializeField] PlayerController player;
     
-    float initialFOV = 60f;
-    float zoomFOV = 75f;
+    float initialFOV = 69f;
+    float zoomFOV = 85f;
     Vector3 offset;
 
-    Coroutine fovCoroutine;
     Camera cam;
     bool fppMode;
 
@@ -25,38 +24,9 @@ public class CameraController : MonoBehaviour{
 
     void Update(){
 
-        if (player.boostActive) IncreaseFOV(player.velocity.z);
-        else ResetFOV(5f);
+        cam.fieldOfView = Mathf.Lerp(initialFOV, zoomFOV, (player.rb.velocity.z - player.minVelocity)/(player.maxVelocity - player.minVelocity));
         TiltCamera(player.targetTilt);
         transform.position = player.transform.position + offset;
-    }
-
-    void IncreaseFOV(float speed){
-        if (fovCoroutine != null) {
-            StopCoroutine(fovCoroutine);
-        }
-        fovCoroutine = StartCoroutine(ChangeFOV(zoomFOV, speed));
-    }
-
-    void ResetFOV(float speed){
-        if (fovCoroutine != null)
-        {
-            StopCoroutine(fovCoroutine);
-        }
-        fovCoroutine = StartCoroutine(ChangeFOV(initialFOV, speed));
-    }
-
-    IEnumerator ChangeFOV(float targetFOV, float speed){
-        float currentFOV = cam.fieldOfView;
-
-        while (Mathf.Abs(currentFOV - targetFOV) > 0.01f)
-        {
-            currentFOV = Mathf.Lerp(currentFOV, targetFOV, Time.deltaTime * speed);
-            cam.fieldOfView = currentFOV;
-            yield return null;
-        }
-
-        cam.fieldOfView = targetFOV;
     }
 
     public void TiltCamera(Vector3 targetTilt){

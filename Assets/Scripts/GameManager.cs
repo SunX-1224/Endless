@@ -19,9 +19,9 @@ public class GameManager : MonoBehaviour {
     GameOverMenu goMenuController;
     LevelGenerator currentLevel;
 
-    int score;
+    public int score;
     float _score;
-    int shards;
+    public int shards;
     int highScore;
 
     void Start(){
@@ -49,7 +49,7 @@ public class GameManager : MonoBehaviour {
     }
 
     public void HandleScoreUpdate(){
-        _score += Time.deltaTime * player.velocity.z / 10f;
+        _score += Time.deltaTime * player.rb.velocity.z / 10f;
         score = (int) _score;
         highScore = score > highScore?score:highScore;
     }
@@ -58,14 +58,6 @@ public class GameManager : MonoBehaviour {
         pauseMenuController.Pause();
     }
 
-    public void AddScore(int x){
-        score += x;
-    }
-
-    public void AddShards(int x){
-        shards += x;
-    }
-    
     public void EndGame(){
 
         PlayerInfo.SetHighScore(highScore);

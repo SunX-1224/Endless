@@ -16,10 +16,9 @@ public class PlayerController: MonoBehaviour{
     [HideInInspector] public bool isAlive = true;
     [HideInInspector] public int jumps;
     [HideInInspector] public int shields;
-    [HideInInspector] public bool boostActive;
     [HideInInspector] public Vector3 targetTilt;
-    [HideInInspector] public Vector3 velocity;
     [HideInInspector] public float turnVelocity;
+    [HideInInspector] public Rigidbody rb;
 
     public float minVelocity;
     public float maxVelocity;
@@ -38,7 +37,6 @@ public class PlayerController: MonoBehaviour{
 
     Vector3 maxTilt = new Vector3(20,0, 50);
     int vertInput = 0;
-    Rigidbody rb;
 
     void Awake(){
         int shipIndex = PlayerInfo.GetShipIndex();
@@ -64,6 +62,7 @@ public class PlayerController: MonoBehaviour{
     public void HandleTransition(){
         transform.position = Vector3.zero;
         minVelocity += 2f;
+        maxVelocity += 2f;
         rb.velocity = new(0f, 0f, minVelocity);
     }
 
@@ -80,8 +79,6 @@ public class PlayerController: MonoBehaviour{
         targetTilt.x = Mathf.Min(maxTilt.x * v, 0f);
         targetTilt.z = -maxTilt.z * h;
 
-        boostActive = force.z > 0f;
-
         if (rb.useGravity && transform.position.y < -0.2f){
             rb.useGravity = false;
             transform.position = new Vector3(transform.position.x, 0, transform.position.z);
@@ -93,9 +90,7 @@ public class PlayerController: MonoBehaviour{
         }
         
         rb.AddForce(force);
-        rb.velocity = new(rb.velocity.z * h, rb.velocity.y, Mathf.Clamp(rb.velocity.z, minVelocity, maxVelocity * (boostActive?1.1f:1f))); 
-
-        velocity =rb.velocity;
+        rb.velocity = new(rb.velocity.z * h, rb.velocity.y, Mathf.Clamp(rb.velocity.z, minVelocity, maxVelocity)); 
     }
 
     public void VerticalInput(int dir){
@@ -171,8 +166,8 @@ public class PlayerController: MonoBehaviour{
     
     public void HandleCapture(string tag){
         if (tag == "Shard"){
-            gameManager.AddScore(10);
-            gameManager.AddShards(1);
+            gameManager.score += 10;
+            gameManager.shards += 1;
             ParticleManager.instance.CaptureShard(transform.position);
             AudioManager.instance.PlaySFX("shardcap");
         }

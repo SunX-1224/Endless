@@ -37,8 +37,8 @@ Gameplay :
 		> Redundant Chunk Destroying Logic < DONE >
 		> Fog effect < DONE >
 		> Level Ending and Transition < DONE >
-		> Better Lightings
-		> Day night cycle programming
+		> Better Lightings < DONE >
+		> Day night cycle programming < DISCARDED >
 
 	2. Scoring methods
 		> Score Method Implementation (Shards) < DONE >
@@ -49,7 +49,7 @@ Gameplay :
 		> *Abilities* capture < DONE >
 
 	4. Main menu
-		> Game logo Design
+		> Game logo Design < DONE >
 		> Logo Integration < DONE >
 		> Menu design < DONE >
 		> Menu programming < DONE >
@@ -89,5 +89,4 @@ Gameplay :
 
 	9. Bugs Fix
 	
-
 
