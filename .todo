@@ -3,6 +3,12 @@
 # TODO
 BUGS : (HIGH PRIORITY)
 
+Menu : 
+	> Help
+		> How to play
+		> Developer's words
+		> About
+
 Environment : (UPDATE) 
 	> Old Environment changes
 		> Remove Materials and Add Textures

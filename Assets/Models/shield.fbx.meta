@@ -3,32 +3,7 @@ guid: eed4a8d035e34e5d3ad4d49e4eea2d1b
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects:
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: body
-    second: {fileID: 2100000, guid: 97e1c957794a9ae468fade924c2ba664, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: emblem
-    second: {fileID: 2100000, guid: d0f9b8ce29fb65453a9ada642686c0df, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: emblem2
-    second: {fileID: 2100000, guid: cf2f5fa04ab3a8b63abe845fa89a725e, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: frame
-    second: {fileID: 2100000, guid: 0cb9a93f9e580e7669ccb9a12db5b6b8, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: horns
-    second: {fileID: 2100000, guid: 53f28065fe696e7c982b45920241a908, type: 2}
+  externalObjects: {}
   materials:
     materialImportMode: 2
     materialName: 0

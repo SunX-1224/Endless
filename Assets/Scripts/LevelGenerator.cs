@@ -10,6 +10,7 @@ public class LevelGenerator : MonoBehaviour{
     [SerializeField] int mapSize = 80;
     [SerializeField] int chunkSize = 20;
     [SerializeField] float maxViewDist = 150f;
+    [SerializeField] Color skyTint;
 
     [HideInInspector] public bool levelCompleted = false;
     
@@ -22,6 +23,8 @@ public class LevelGenerator : MonoBehaviour{
     void Start(){
         chunksInViewDist = Mathf.RoundToInt(maxViewDist / chunkSize);
         endLine = mapSize * chunkSize;
+        RenderSettings.skybox.SetColor("_Tint", skyTint);
+        RenderSettings.fogColor = skyTint;
     }
 
     void Update(){
@@ -58,9 +61,9 @@ public class LevelGenerator : MonoBehaviour{
         if(coord.y > (mapSize - 1) || coord.y <= 3) return 0;
 
         coord.y -= 1f;
-        if(!chunksInWorld.ContainsKey(coord)) return chunkTypes[0].GetComponent<ChunkData>().GetRandomNeighbour();
+        if(!chunksInWorld.ContainsKey(coord)) return chunkTypes[0].GetComponent<ChunkData>().GetRandomNeighbour(chunkTypes.Count);
         
-        return chunkTypes[chunksInWorld[coord].index].GetComponent<ChunkData>().GetRandomNeighbour();        
+        return chunkTypes[chunksInWorld[coord].index].GetComponent<ChunkData>().GetRandomNeighbour(chunkTypes.Count);
     }
 
     void generateChunk(Vector2 coord){

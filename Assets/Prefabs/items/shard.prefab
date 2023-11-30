@@ -34,23 +34,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: fbacb261ddb8753e286ac318fba63894, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.6491625
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: fbacb261ddb8753e286ac318fba63894, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0.6491625
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: fbacb261ddb8753e286ac318fba63894, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.28033578
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: fbacb261ddb8753e286ac318fba63894, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.28033578
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: fbacb261ddb8753e286ac318fba63894, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
-      value: -90
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: fbacb261ddb8753e286ac318fba63894, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
@@ -58,7 +58,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: fbacb261ddb8753e286ac318fba63894, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: -46.713
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: fbacb261ddb8753e286ac318fba63894, type: 3}
       propertyPath: m_ConstrainProportionsScale
@@ -104,5 +104,5 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 0.012443072
-  m_Center: {x: -0.0024430694, y: -3.7435515e-12, z: 0.009774784}
+  m_Radius: 0.01627678
+  m_Center: {x: 0, y: 0, z: 0}

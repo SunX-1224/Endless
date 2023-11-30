@@ -13,9 +13,9 @@ public class PauseMenu : MonoBehaviour{
     }
 
     public void Resume(){
-        pauseMenuUI.SetActive(false);
-        Time.timeScale = 1f;
         AudioManager.instance.ResumeSFX();
+        Time.timeScale = 1f;
+        pauseMenuUI.SetActive(false);
     }
     
     public void LoadMenu(){

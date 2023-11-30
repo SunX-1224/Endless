@@ -19,10 +19,13 @@ public class GameManager : MonoBehaviour {
     GameOverMenu goMenuController;
     LevelGenerator currentLevel;
 
-    public int score;
+    [HideInInspector] public int score;
+    [HideInInspector] public int shards;
     float _score;
-    public int shards;
     int highScore;
+
+    float del = -0.06f;
+    float exposure = 6f;
 
     void Start(){
         pauseMenuController = GetComponent<PauseMenu>();
@@ -46,6 +49,10 @@ public class GameManager : MonoBehaviour {
 
         HandleScoreUpdate();
         SetStatusUI();
+        if(exposure <= 0.1f) del = 0.06f;
+        else if(exposure >= 4f) del = -0.06f;
+        exposure += del * Time.deltaTime;
+        RenderSettings.skybox.SetFloat("_Exposure", exposure);
     }
 
     public void HandleScoreUpdate(){

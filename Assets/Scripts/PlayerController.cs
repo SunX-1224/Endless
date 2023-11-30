@@ -68,7 +68,7 @@ public class PlayerController: MonoBehaviour{
 
     void HandleControls(){
 
-        Vector3 force = new(0, 0, 0);
+        Vector3 force = new(0, 0, 0.1f);
 
         targetTilt.y = 0;
         
@@ -90,7 +90,7 @@ public class PlayerController: MonoBehaviour{
         }
         
         rb.AddForce(force);
-        rb.velocity = new(rb.velocity.z * h, rb.velocity.y, Mathf.Clamp(rb.velocity.z, minVelocity, maxVelocity)); 
+        rb.velocity = new(rb.velocity.z * h, rb.velocity.y, Mathf.Clamp(rb.velocity.z, minVelocity, maxVelocity));
     }
 
     public void VerticalInput(int dir){

@@ -17,28 +17,28 @@ RenderSettings:
   m_Fog: 1
   m_FogColor: {r: 0.24690849, g: 0.23794064, b: 0.23794064, a: 1}
   m_FogMode: 3
-  m_FogDensity: 0.05
+  m_FogDensity: 0.02
   m_LinearFogStart: 0
   m_LinearFogEnd: 300
   m_AmbientSkyColor: {r: 0.212, g: 0.227, b: 0.259, a: 1}
   m_AmbientEquatorColor: {r: 0.114, g: 0.125, b: 0.133, a: 1}
   m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
-  m_AmbientIntensity: 1
+  m_AmbientIntensity: 0
   m_AmbientMode: 0
-  m_SubtractiveShadowColor: {r: 0.30360562, g: 0.32129207, b: 0.3660978, a: 1}
+  m_SubtractiveShadowColor: {r: 0.19253623, g: 0.19253623, b: 0.19253623, a: 1}
   m_SkyboxMaterial: {fileID: 2100000, guid: 4c9569c89586d3627b4a6a6453fca33e, type: 2}
-  m_HaloStrength: 0.5
-  m_FlareStrength: 1
+  m_HaloStrength: 0.081
+  m_FlareStrength: 0.376
   m_FlareFadeSpeed: 3
   m_HaloTexture: {fileID: 0}
   m_SpotCookie: {fileID: 10001, guid: 0000000000000000e000000000000000, type: 0}
   m_DefaultReflectionMode: 0
   m_DefaultReflectionResolution: 128
-  m_ReflectionBounces: 1
-  m_ReflectionIntensity: 1
+  m_ReflectionBounces: 2
+  m_ReflectionIntensity: 0.888
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.30651122, g: 0.42593303, b: 0.4835449, a: 1}
+  m_IndirectSpecularColor: {r: 0.28905442, g: 0.4027096, b: 0.4575395, a: 0.888}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -791,7 +791,7 @@ MonoBehaviour:
   targetTilt: {x: 0, y: 0, z: 0}
   turnVelocity: 0
   rb: {fileID: 0}
-  minVelocity: 15
+  minVelocity: 17
   maxVelocity: 28
   boost: 1
   turnPower: 13
@@ -1056,6 +1056,7 @@ MonoBehaviour:
   player: {fileID: 638468568}
   levels:
   - {fileID: 2153018815843600339, guid: ef737ad8521c3db83b0a1b2627f89012, type: 3}
+  - {fileID: 6789649326402773334, guid: 056beeb49c9e5133fb43c9af274fe859, type: 3}
   score: 0
   shards: 0
 --- !u!114 &702195583
@@ -1171,13 +1172,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 705507993}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.96345174, y: 0.026840657, z: -0.10568534, w: 0.24468558}
+  m_LocalRotation: {x: 0.9533371, y: -0.07358917, z: 0.23002711, w: 0.18116449}
   m_LocalPosition: {x: 0, y: 3, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 151.5, y: 12.52, z: 0}
+  m_LocalEulerAnglesHint: {x: 157.711, y: -26.434998, z: 3.5299988}
 --- !u!1 &713705386
 GameObject:
   m_ObjectHideFlags: 0
@@ -6166,7 +6167,7 @@ GameObject:
   - component: {fileID: 893035070}
   m_Layer: 5
   m_Name: Resume
-  m_TagString: button
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

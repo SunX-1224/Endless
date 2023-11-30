@@ -3,27 +3,7 @@ guid: 3f2944397985af094bea972c9205c8b7
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects:
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: body
-    second: {fileID: 2100000, guid: b962e09b68186e230af60176c698a99e, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: inwings
-    second: {fileID: 2100000, guid: 1ddd7fc715ec3f7d1904513020f89aaf, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: light
-    second: {fileID: 2100000, guid: ac8699072cb2e476a9ddb516b8056537, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: wings.001
-    second: {fileID: 2100000, guid: c64d4c5929b936cc1af1bbf98c85fb4b, type: 2}
+  externalObjects: {}
   materials:
     materialImportMode: 2
     materialName: 0
