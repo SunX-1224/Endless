@@ -22,7 +22,11 @@ Environment : (UPDATE)
 
 Gameplay : (UPDATE)
 	> Audio Programming
-		> Environment based gameplay audio 
+		> Environment based gameplay audio
+	
+	> Game Over
+		> Revive with shards
+		> Game Over Animation
 
 	> Project Build
 		> Build project

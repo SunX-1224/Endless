@@ -14,6 +14,7 @@ public struct MeshData{
 public class PlayerController: MonoBehaviour{
 
     [HideInInspector] public bool isAlive = true;
+    [HideInInspector] public bool revived = false;
     [HideInInspector] public int jumps;
     [HideInInspector] public int shields;
     [HideInInspector] public Vector3 targetTilt;
@@ -50,7 +51,10 @@ public class PlayerController: MonoBehaviour{
     }
 
     void Update(){
-        if(!isAlive) return;
+        if(!isAlive){
+            rb.velocity = Vector3.zero;
+            return;
+        }
         TiltPlayer();
     }
 
@@ -68,7 +72,7 @@ public class PlayerController: MonoBehaviour{
 
     void HandleControls(){
 
-        Vector3 force = new(0, 0, 0.1f);
+        Vector3 force = new(0, 0, 0.07f);
 
         targetTilt.y = 0;
         
@@ -137,26 +141,25 @@ public class PlayerController: MonoBehaviour{
         transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, 3f * Time.deltaTime);
     }
 
+    public void CrashSurvival(){
+        PushUp();
+        AudioManager.instance.PlaySFX("shield");
+        ParticleManager.instance.JumpEffect(transform);
+    }
 
     void OnTriggerEnter(Collider collider){
         if(!isAlive) return;
         
         if (collider.tag == "Obstacle"){
-            if(isAlive){
-                if(shields > 0){
-                    shields--;
-                    PickUpsUIUpdate();
-                    PushUp();
-                    AudioManager.instance.PlaySFX("shield");
-                    ParticleManager.instance.JumpEffect(transform);
-                    ParticleManager.instance.Explosion(transform.position + new Vector3(0f, -1f, 2f));
-                    Destroy(collider.gameObject);
-                }else{
-                    isAlive = false;
-                    rb.velocity = Vector3.zero;
-                    AudioManager.instance.PlaySFX("death");
-                    gameManager.EndGame();
-                }
+            Destroy(collider.gameObject);
+            ParticleManager.instance.Explosion(transform.position + new Vector3(0f, -1f, 5f));
+            if(shields > 0){
+                shields--;
+                PickUpsUIUpdate();
+                CrashSurvival();
+            }else{
+                AudioManager.instance.PlaySFX("death");
+                gameManager.HandlePlayerCrash();
             }
         }else{
             HandleCapture(collider.tag);

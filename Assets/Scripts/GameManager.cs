@@ -23,6 +23,7 @@ public class GameManager : MonoBehaviour {
     [HideInInspector] public int shards;
     float _score;
     int highScore;
+    public static int REVIVAL_COST = 20;
 
     float del = -0.06f;
     float exposure = 6f;
@@ -61,17 +62,28 @@ public class GameManager : MonoBehaviour {
         highScore = score > highScore?score:highScore;
     }
 
-    public void HandlePause(){
-        pauseMenuController.Pause();
+    public void HandlePlayerCrash(){
+        if(!player.revived && shards >= REVIVAL_COST){
+            goMenuController.StartRevivalRoutine();
+        }else{
+            EndGame();
+        }
+    }
+
+    public void BuyLife(){
+        player.revived = true;
+        goMenuController.StopRevival();
+        shards -= REVIVAL_COST;
+        PlayerInfo.SetShards(shards);
+        player.CrashSurvival();
     }
 
     public void EndGame(){
-
+        player.isAlive = false;
+        player.gameObject.SetActive(false);
+        StartCoroutine(EndGameTransition());
         PlayerInfo.SetHighScore(highScore);
         PlayerInfo.SetShards(shards);
-
-        overlay.gameObject.SetActive(false);
-        goMenuController.Activate();
     }
 
     void SetStatusUI(){
@@ -92,6 +104,11 @@ public class GameManager : MonoBehaviour {
         }
         c.a = target;
         overlay.color = c;
+    }
+
+    IEnumerator EndGameTransition(){
+        yield return Fade(0f, 1f);
+        goMenuController.ActivateGameOverUI();
     }
 
     IEnumerator HandleTransition(){
