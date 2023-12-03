@@ -95,6 +95,7 @@ public class PlayerController: MonoBehaviour{
         
         rb.AddForce(force);
         rb.velocity = new(rb.velocity.z * h, rb.velocity.y, Mathf.Clamp(rb.velocity.z, minVelocity, maxVelocity));
+        targetTilt.x -= rb.velocity.y * 2f;
     }
 
     public void VerticalInput(int dir){
@@ -158,7 +159,6 @@ public class PlayerController: MonoBehaviour{
                 PickUpsUIUpdate();
                 CrashSurvival();
             }else{
-                AudioManager.instance.PlaySFX("death");
                 gameManager.HandlePlayerCrash();
             }
         }else{

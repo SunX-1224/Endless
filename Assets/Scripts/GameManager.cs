@@ -81,6 +81,7 @@ public class GameManager : MonoBehaviour {
     public void EndGame(){
         player.isAlive = false;
         player.gameObject.SetActive(false);
+        AudioManager.instance.PlaySFX("death");
         StartCoroutine(EndGameTransition());
         PlayerInfo.SetHighScore(highScore);
         PlayerInfo.SetShards(shards);

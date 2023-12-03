@@ -17,6 +17,7 @@ public class GameOverMenu : MonoBehaviour{
         Time.timeScale = 0f;
         inGameOverlay.SetActive(false);
         reviveUI.SetActive(true);
+        AudioManager.instance.PlaySFX("freeze");
         revivalRoutine = StartCoroutine(RevivalRoutine());
     }
 

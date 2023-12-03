@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 0.054
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.002106419, g: 0.0031508214, b: 0.003771125, a: 0.054}
+  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 0.054}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -3580,7 +3580,7 @@ PrefabInstance:
       objectReference: {fileID: 13317429}
     - target: {fileID: 3940502191130893333, guid: 2b4ebd9c3a962ad3b96394451872fed0, type: 3}
       propertyPath: sfxs.Array.size
-      value: 7
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 3940502191130893333, guid: 2b4ebd9c3a962ad3b96394451872fed0, type: 3}
       propertyPath: musics.Array.size
@@ -3641,6 +3641,14 @@ PrefabInstance:
     - target: {fileID: 3940502191130893333, guid: 2b4ebd9c3a962ad3b96394451872fed0, type: 3}
       propertyPath: sfxs.Array.data[6].name
       value: click
+      objectReference: {fileID: 0}
+    - target: {fileID: 3940502191130893333, guid: 2b4ebd9c3a962ad3b96394451872fed0, type: 3}
+      propertyPath: sfxs.Array.data[7].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: 85ae7c1180930762aa3982be10e5b5b2, type: 3}
+    - target: {fileID: 3940502191130893333, guid: 2b4ebd9c3a962ad3b96394451872fed0, type: 3}
+      propertyPath: sfxs.Array.data[7].name
+      value: freeze
       objectReference: {fileID: 0}
     - target: {fileID: 3940502191130893333, guid: 2b4ebd9c3a962ad3b96394451872fed0, type: 3}
       propertyPath: musics.Array.data[0].clip

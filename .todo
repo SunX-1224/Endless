@@ -4,11 +4,9 @@
 BUGS : (HIGH PRIORITY)
 
 Menu : 
-	> Help
-		> How to play
-		> Developer's words
-		> About
-
+	> Gamplay
+		> Changeable View Distance
+	
 Environment : (UPDATE) 
 	> Old Environment changes
 		> Remove Materials and Add Textures
@@ -24,16 +22,9 @@ Gameplay : (UPDATE)
 	> Audio Programming
 		> Environment based gameplay audio
 	
-	> Game Over
-		> Revive with shards
-		> Game Over Animation
-
 	> Project Build
 		> Build project
 		> Test Project
-	
-	> Deploy project
-		> Google playstore Account 
-		> Deploy game on store
-	
 
+	> Deploy
+		> Deploy Project on WEBGL
