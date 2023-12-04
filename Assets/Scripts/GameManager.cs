@@ -29,6 +29,9 @@ public class GameManager : MonoBehaviour {
     float exposure = 6f;
 
     void Start(){
+        float viewDist = PlayerPrefs.GetFloat("viewDistance", 80f);
+        RenderSettings.fogDensity = Mathf.Lerp(0.05f, 0.01f, (viewDist-70f)/130f);
+
         pauseMenuController = GetComponent<PauseMenu>();
         goMenuController = GetComponent<GameOverMenu>();
 

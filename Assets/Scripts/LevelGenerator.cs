@@ -9,19 +9,20 @@ public class LevelGenerator : MonoBehaviour{
 
     [SerializeField] int mapSize = 80;
     [SerializeField] int chunkSize = 20;
-    [SerializeField] float maxViewDist = 150f;
     [SerializeField] Color skyTint;
 
     [HideInInspector] public bool levelCompleted = false;
     
     Transform player;
+    float viewDist;
     int endLine;
     int chunksInViewDist;
     Dictionary<Vector2, Chunk> chunksInWorld = new Dictionary<Vector2, Chunk>();
     HashSet<Vector2> lastFrameChunks = new HashSet<Vector2>();
 
     void Start(){
-        chunksInViewDist = Mathf.RoundToInt(maxViewDist / chunkSize);
+        viewDist = PlayerPrefs.GetFloat("viewDistance", 80f);
+        chunksInViewDist = Mathf.RoundToInt(viewDist / chunkSize);
         endLine = mapSize * chunkSize;
         RenderSettings.skybox.SetColor("_Tint", skyTint);
         RenderSettings.fogColor = skyTint;

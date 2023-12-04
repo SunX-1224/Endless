@@ -8,8 +8,10 @@ using TMPro;
 public class MainMenu : MonoBehaviour{
     
     [SerializeField] TMP_Text volumeText;
+    [SerializeField] TMP_Text viewDistanceText;
     [SerializeField] TMP_Dropdown qualityDropdown;
-    [SerializeField] Slider slider;
+    [SerializeField] Slider volumeSlider;
+    [SerializeField] Slider viewDistSlider;
     [SerializeField] Toggle fppToggle;
     [SerializeField] GameObject savingPromptUI;
     [SerializeField] GameObject assetsMenu;
@@ -30,12 +32,13 @@ public class MainMenu : MonoBehaviour{
     }
 
     void Start(){
-        slider.value = PlayerPrefs.GetFloat("volume", 1.0f);
+        viewDistSlider.value = PlayerPrefs.GetFloat("viewDistance", 80f);
+        volumeSlider.value = PlayerPrefs.GetFloat("volume", 1.0f);
         qualityDropdown.value = PlayerPrefs.GetInt("quality", 1);
         fppToggle.isOn = PlayerPrefs.GetInt("fpp", 0) > 0;
 
         QualitySettings.SetQualityLevel(qualityDropdown.value);
-        AudioListener.volume = slider.value;
+        AudioListener.volume = volumeSlider.value;
 
         AudioManager.instance.StopSFX();
         AudioManager.instance.PlayMusic("bg");
@@ -52,6 +55,15 @@ public class MainMenu : MonoBehaviour{
     public void SetVolume(float volume){
         volumeText.text = volume.ToString("0.0");
         AudioListener.volume = volume;
+    }
+
+    public void SaveGameplaySettings(){
+        StartCoroutine(SavingPrompt());
+    }
+
+    public void SetViewDist(float distance){
+        viewDistanceText.text = distance.ToString("0.0");
+        PlayerPrefs.SetFloat("viewDistance", distance);
     }
 
     public void SaveVolume(){
