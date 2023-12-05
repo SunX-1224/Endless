@@ -41,10 +41,14 @@ public class PlayerController: MonoBehaviour{
 
     void Awake(){
         int shipIndex = PlayerInfo.GetShipIndex();
-        
-        MeshRenderer mr = GetComponent<MeshRenderer>();
-        mr.sharedMaterials = shipMeshes[shipIndex].meshRenderer.sharedMaterials;
-        GetComponent<MeshFilter>().mesh = shipMeshes[shipIndex].mesh;
+        bool fpp = PlayerPrefs.GetInt("fpp", 0)>0;
+        if(!fpp){
+            MeshRenderer mr = GetComponent<MeshRenderer>();
+            mr.sharedMaterials = shipMeshes[shipIndex].meshRenderer.sharedMaterials;
+            GetComponent<MeshFilter>().mesh = shipMeshes[shipIndex].mesh;
+        }else{
+            GetComponent<MeshRenderer>().enabled = false;
+        }
 
         rb = GetComponent<Rigidbody>();
         PickUpsUIUpdate();

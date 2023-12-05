@@ -1003,7 +1003,7 @@ MonoBehaviour:
   targetTilt: {x: 0, y: 0, z: 0}
   turnVelocity: 0
   rb: {fileID: 0}
-  minVelocity: 17
+  minVelocity: 14
   maxVelocity: 28
   boost: 1
   turnPower: 13
@@ -1269,6 +1269,7 @@ MonoBehaviour:
   levels:
   - {fileID: 2153018815843600339, guid: ef737ad8521c3db83b0a1b2627f89012, type: 3}
   - {fileID: 6789649326402773334, guid: 056beeb49c9e5133fb43c9af274fe859, type: 3}
+  - {fileID: 5933124568630967033, guid: 311ea7b1ca6fdc86ab86b1c01030646d, type: 3}
   score: 0
   shards: 0
 --- !u!114 &702195583
@@ -8265,7 +8266,7 @@ Transform:
   m_GameObject: {fileID: 1646363257}
   serializedVersion: 2
   m_LocalRotation: {x: 0.08315603, y: 0, z: 0, w: 0.99653655}
-  m_LocalPosition: {x: 0, y: 0.6, z: -1.4}
+  m_LocalPosition: {x: 0, y: 0.18, z: 0.031}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

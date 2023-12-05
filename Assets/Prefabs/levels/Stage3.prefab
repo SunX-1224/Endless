@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &2153018815843600339
+--- !u!1 &5933124568630967033
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,53 +8,53 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 3121724919801138001}
-  - component: {fileID: 8554148432709077047}
+  - component: {fileID: 325132869699718485}
+  - component: {fileID: 3817585942267006372}
   m_Layer: 0
-  m_Name: Stage1
+  m_Name: Stage3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &3121724919801138001
+--- !u!4 &325132869699718485
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2153018815843600339}
+  m_GameObject: {fileID: 5933124568630967033}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 2.9156556, y: 4.0810947, z: -8.116113}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8554148432709077047
+--- !u!114 &3817585942267006372
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2153018815843600339}
+  m_GameObject: {fileID: 5933124568630967033}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: aeda17dc51c083994aa783db4a691d5b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   chunkTypes:
-  - {fileID: 276395200318587802, guid: 80e0dd7ad94542eec8c75ed22bb820f4, type: 3}
+  - {fileID: 7154043712740398317, guid: 20422291b74da0972871f83345331772, type: 3}
   - {fileID: 3122687136690888540, guid: c76182c4cb857ca28a9bd310ab2fff21, type: 3}
   - {fileID: 3122687136690888540, guid: f70871a2c2f340574ab00f5fcd989271, type: 3}
   - {fileID: 3122687136690888540, guid: f3abfc9b5f93eb1169e24c20db76e468, type: 3}
-  - {fileID: 3122687136690888540, guid: 0d103d26f8d5751d8b96783b95ead158, type: 3}
-  - {fileID: 3122687136690888540, guid: ceddab3ea57e982eda2694fa39424f89, type: 3}
-  - {fileID: 3122687136690888540, guid: 173e7c0bdbac44770a9b8df5bdf84e9a, type: 3}
-  - {fileID: 3122687136690888540, guid: ee49618d8f28098d6aa7472a8ef70ee7, type: 3}
-  - {fileID: 3122687136690888540, guid: 5d9e2849bd8227b828842f8a1f3998a4, type: 3}
-  mapSize: 50
+  - {fileID: 7001581755722531365, guid: 7703abeba437f86199de9347e5b0302d, type: 3}
+  - {fileID: 6455867098385845905, guid: f1ceb3716a21816a19fd3d3dfcf5929d, type: 3}
+  - {fileID: 6057613899965203957, guid: 11c7bb9fd3bf3a3d99ef17df93a24669, type: 3}
+  - {fileID: 7268400308151287738, guid: 046b1364a510dfef084ed32156e3728a, type: 3}
+  - {fileID: 5518875458953372832, guid: 4844b2b401801d0d3890d8891d386c45, type: 3}
+  mapSize: 40
   chunkSize: 20
-  skyTint: {r: 0.7830189, g: 0.7734158, b: 0.7350036, a: 0}
+  skyTint: {r: 0.49751425, g: 0.39957967, b: 0, a: 0}
   levelCompleted: 0

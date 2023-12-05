@@ -157,6 +157,6 @@ public class MainMenu : MonoBehaviour{
     }
 
     int GetCost(int i){
-        return 300*(i+i/2);
+        return 200*(i+i/2);
     }
 }

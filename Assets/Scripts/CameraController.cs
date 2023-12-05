@@ -17,7 +17,7 @@ public class CameraController : MonoBehaviour{
     void Start(){
         fppMode= PlayerPrefs.GetInt("fpp", 0)>0;
         if(fppMode) {
-            offset = new Vector3(0f, 0.152f, 0.397f);
+            offset = new Vector3(0f, 0.5f, 0.0f);
             fppOverlay.SetActive(true);
         }
         else offset = new Vector3(0f, 0.6f, -1.4f);
@@ -34,7 +34,8 @@ public class CameraController : MonoBehaviour{
 
     public void TiltCamera(Vector3 targetTilt){
         targetTilt.z *= 0.4f;
-        if(!fppMode) targetTilt.x = 9.54f;
+        if(!fppMode) targetTilt.x = 0f;
+        targetTilt.x += 12f;
         Quaternion targetRotation = Quaternion.Euler(targetTilt);
         transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, 3f * Time.deltaTime);
     }
