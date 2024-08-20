@@ -14,7 +14,7 @@ public struct MeshData{
 public class PlayerController: MonoBehaviour{
 
     [HideInInspector] public bool isAlive = true;
-    [HideInInspector] public bool revived = false;
+    [HideInInspector] public int revives = 2;
     [HideInInspector] public int jumps;
     [HideInInspector] public int shields;
     [HideInInspector] public Vector3 targetTilt;
@@ -38,6 +38,7 @@ public class PlayerController: MonoBehaviour{
 
     Vector3 maxTilt = new Vector3(20,0, 50);
     int vertInput = 0;
+    float sensitivity = 1.8f;
 
     void Awake(){
         int shipIndex = PlayerInfo.GetShipIndex();
@@ -49,6 +50,9 @@ public class PlayerController: MonoBehaviour{
         }else{
             GetComponent<MeshRenderer>().enabled = false;
         }
+
+        jumpPower += shipIndex * 10f;
+        revives += shipIndex;
 
         rb = GetComponent<Rigidbody>();
         PickUpsUIUpdate();
@@ -69,9 +73,9 @@ public class PlayerController: MonoBehaviour{
 
     public void HandleTransition(){
         transform.position = Vector3.zero;
-        minVelocity += 2f;
         maxVelocity += 2f;
-        rb.velocity = new(0f, 0f, minVelocity);
+        minVelocity += 1f;
+        rb.velocity = new(0f, 0f, (minVelocity + rb.velocity.z)/2f);
     }
 
     void HandleControls(){
@@ -81,7 +85,7 @@ public class PlayerController: MonoBehaviour{
         targetTilt.y = 0;
         
         float v = (float) vertInput;
-        HandleTouch(out float h);
+        HandleHorizontalInput(out float h);
 
         force.z = boost * v;
         targetTilt.x = Mathf.Min(maxTilt.x * v, 0f);
@@ -110,11 +114,21 @@ public class PlayerController: MonoBehaviour{
         vertInput = 0;
     }
 
+    void HandleHorizontalInput(out float h){
+      ControlType type = PlayerInfo.GetControlType();
+      if(type == ControlType.TILT) HandleTilt(out h);
+      else HandleTouch(out h);
+    }
+
+    void HandleTilt(out float h){
+      h = Input.acceleration.x * sensitivity;
+    }
+
     void HandleTouch(out float h){
         h = 0f;
         foreach (Touch touch in Input.touches){
             if(EventSystem.current.IsPointerOverGameObject(touch.fingerId)) continue;
-            float x = (touch.position.x / Screen.width - 0.5f)*1.8f;
+            float x = (touch.position.x / Screen.width - 0.5f)*sensitivity;
             h = Mathf.Abs(x) > Mathf.Abs(h)?x:h;
         }
     }

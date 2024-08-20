@@ -3,14 +3,7 @@
 # TODO
 BUGS : (HIGH PRIORITY)
 
-Menu : 
-	> Gamplay
-		> Changeable View Distance
-	
 Environment : (UPDATE) 
-	> Old Environment changes
-		> Remove Materials and Add Textures
-	
 	> New Environment Design
 		> Obstacles design planning
 		> Obstacles modelling
@@ -19,9 +12,6 @@ Environment : (UPDATE)
 		> Different environments aesthetics planning
 
 Gameplay : (UPDATE)
-	> Audio Programming
-		> Environment based gameplay audio
-	
 	> Project Build
 		> Build project
 		> Test Project

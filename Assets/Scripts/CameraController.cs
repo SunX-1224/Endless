@@ -7,9 +7,9 @@ public class CameraController : MonoBehaviour{
     [SerializeField] PlayerController player;
     [SerializeField] GameObject fppOverlay;
     
-    float initialFOV = 69f;
-    float zoomFOV = 85f;
-    Vector3 offset;
+    [SerializeField] float initialFOV;
+    [SerializeField] float zoomFOV;
+    [SerializeField] Vector3 offset;
 
     Camera cam;
     bool fppMode;
@@ -20,7 +20,6 @@ public class CameraController : MonoBehaviour{
             offset = new Vector3(0f, 0.5f, 0.0f);
             fppOverlay.SetActive(true);
         }
-        else offset = new Vector3(0f, 0.6f, -1.4f);
 
         cam = GetComponent<Camera>();
         cam.fieldOfView = initialFOV;
@@ -35,7 +34,7 @@ public class CameraController : MonoBehaviour{
     public void TiltCamera(Vector3 targetTilt){
         targetTilt.z *= 0.4f;
         if(!fppMode) targetTilt.x = 0f;
-        targetTilt.x += 12f;
+        targetTilt.x += 10f;
         Quaternion targetRotation = Quaternion.Euler(targetTilt);
         transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, 3f * Time.deltaTime);
     }

@@ -66,7 +66,7 @@ public class GameManager : MonoBehaviour {
     }
 
     public void HandlePlayerCrash(){
-        if(!player.revived && shards >= REVIVAL_COST){
+        if(player.revives > 0 && shards >= REVIVAL_COST){
             goMenuController.StartRevivalRoutine();
         }else{
             EndGame();
@@ -74,7 +74,7 @@ public class GameManager : MonoBehaviour {
     }
 
     public void BuyLife(){
-        player.revived = true;
+        player.revives--;
         goMenuController.StopRevival();
         shards -= REVIVAL_COST;
         PlayerInfo.SetShards(shards);
