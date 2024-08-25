@@ -11,6 +11,7 @@ public class MainMenu : MonoBehaviour{
   [SerializeField] TMP_Dropdown qualityDropdown;
   [SerializeField] Slider volumeSlider;
   [SerializeField] Slider viewDistSlider;
+  [SerializeField] Slider sensitivitySlider;
   [SerializeField] Toggle fppToggle;
   [SerializeField] GameObject savingPromptUI;
   [SerializeField] GameObject assetsMenu;
@@ -43,6 +44,7 @@ public class MainMenu : MonoBehaviour{
 
     viewDistSlider.value = PlayerPrefs.GetFloat("viewDistance", 80f);
     volumeSlider.value = PlayerPrefs.GetFloat("volume", 1.0f);
+    sensitivitySlider.value = PlayerInfo.GetSensitivity();
     qualityDropdown.value = PlayerPrefs.GetInt("quality", 1);
     fppToggle.isOn = PlayerPrefs.GetInt("fpp", 0) > 0;
 
@@ -58,7 +60,6 @@ public class MainMenu : MonoBehaviour{
   void HandleControlCheck(){
     ControlType control = PlayerInfo.GetControlType();
     if(control == ControlType.NONE){
-      //set the prompt active
       controlPrompt.SetActive(true);
       PlayerInfo.SetControlType(ControlType.TAP);
     }
@@ -95,6 +96,10 @@ public class MainMenu : MonoBehaviour{
   public void SetVolume(float volume){
     volumeText.text = volume.ToString("0.0");
     AudioListener.volume = volume;
+  }
+
+  public void SetSensitivity(float value){
+    PlayerInfo.SetSensitivity(value);
   }
 
   public void SaveGameplaySettings(){

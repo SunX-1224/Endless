@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -53,6 +52,7 @@ public class PlayerController: MonoBehaviour{
 
         jumpPower += shipIndex * 10f;
         revives += shipIndex;
+        sensitivity =PlayerInfo.GetSensitivity();
 
         rb = GetComponent<Rigidbody>();
         PickUpsUIUpdate();

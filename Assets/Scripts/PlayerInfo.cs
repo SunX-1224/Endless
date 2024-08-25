@@ -38,6 +38,14 @@ public class PlayerInfo : MonoBehaviour {
     return PlayerPrefs.GetInt("shipUnlockMask", 1);
   }
 
+  public static float GetSensitivity(){
+    return PlayerPrefs.GetFloat("sensitivity", 1f);
+  }
+
+  public static void SetSensitivity(float value){
+    PlayerPrefs.SetFloat("sensitivity", value);
+  }
+
   public static ControlType GetControlType(){
     int controlType = PlayerPrefs.GetInt("controlType", 0);
     switch(controlType){
