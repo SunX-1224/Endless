@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 0.054
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.049179308, g: 0.0761111, b: 0.100665055, a: 0.054}
+  m_IndirectSpecularColor: {r: 0.05626323, g: 0.085384555, b: 0.11184236, a: 0.054}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1390,7 +1390,6 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 9dc2148844b8d6c22955e148d4e384c8, type: 3}
   - {fileID: 21300000, guid: 9fceeed0ba1799d4f8f0d5b3f34ea26f, type: 3}
   - {fileID: 21300000, guid: 72759dc8e3b7b4a0f8a2fb9db5625187, type: 3}
-  - {fileID: 21300000, guid: 116233e326830ff618a8d3f43ca5bce9, type: 3}
   controlPrompt: {fileID: 1344435198}
   tiltButton: {fileID: 1621075687}
   tapButton: {fileID: 1803919268}
